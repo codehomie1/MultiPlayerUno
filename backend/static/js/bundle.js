@@ -1,0 +1,1 @@
+(()=>{"use strict";console.log("Hello from a bundled asset."),console.log("Logging Hello from other")})();
