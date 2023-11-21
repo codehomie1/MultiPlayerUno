@@ -21,13 +21,16 @@ if (process.env.NODE_ENV === "development") {
   app.use(connectLiveReload());
 }
 
+const aString = "sdm;sfm;mdfkm;singlequotes";
+console.log(aString);
+
 app.use(morgan("dev"));
 
 app.use(express.json());
-app.use(express.urlencoded({extended: false}));
+app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser);
 
-app.set("views", path.join(__dirname, "views")); 
+app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 app.use(express.static(path.join(__dirname, "static")));
 
