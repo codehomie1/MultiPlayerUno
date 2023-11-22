@@ -1,17 +1,16 @@
 const express = require("express");
 const router = express.Router();
 
-router.get('/', (req,res) => {
+console.log("inside router");
 
-    res.render('root', {name:"default"});
+router.get("/", (_request, response) => {
+  response.render("root", { name: "defaultName" });
 });
 
 router.get("/:name", (request, response) => {
-    const { name } = request.params;
+  const { name } = request.params;
 
-    response.render('root', { name });
+  response.render("root", { name });
 });
-
-
 
 module.exports = router;
