@@ -1,10 +1,8 @@
 const express = require("express");
 const router = express.Router();
 
-console.log("inside router");
-
-router.get("/", (_request, response) => {
-  response.render("root", { name: "defaultName" });
+router.get("/", (req, res) => {
+  res.render("root", { name: "default" });
 });
 
 router.get("/:name", (request, response) => {
