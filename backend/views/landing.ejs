@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Landing Page</title>
+        <link rel="stylesheet" href="/css/home.css">
+        <script src="/js/bundle.js"></script>
+    </head>
+    <body>
+        <h1> 
+            Hello <% if (name === null) { %> User <% } else { %><%= name %><%}%>
+            Welcome to Uno Landing Page
+        </h1>
+        <img src="/images/favicon.ico" alt="Reddit icon">
+
+        <ul>
+            <li><a href="/">Landing</a></li>
+            <li><a href="/auth/sign_up">Sign-up</a></li>
+            <li><a href="/lobby">Lobby</a></li>
+            <li><a href="/games/42">Game 42</a></li>
+        </ul>
+    </body>
+</html>
