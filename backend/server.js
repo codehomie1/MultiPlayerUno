@@ -1,3 +1,4 @@
+require("dotenv").config();
 const path = require("path");
 const createError = require("http-errors");
 const morgan = require("morgan");
@@ -16,8 +17,6 @@ const PORT = process.env.PORT || 3000;
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
-const rootRoutes = require("./routes/root");
-
 if (process.env.NODE_ENV === "development") {
   const livereload = require("livereload");
   const connectLiveReload = require("connect-livereload");
@@ -35,7 +34,15 @@ if (process.env.NODE_ENV === "development") {
 
 app.use(express.static(path.join(__dirname, "static")));
 
-app.use("/", rootRoutes);
+const landingRoutes = require("./routes/landing");
+const authRoutes = require("./routes/authentication");
+const globalLobbyRoutes = require("./routes/global_lobby");
+const gameRoutes = require("./routes/game");
+
+app.use("/", landingRoutes);
+app.use("/auth", authRoutes);
+app.use("/lobby", globalLobbyRoutes);
+app.use("/games", gameRoutes);
 
 app.use((_req, _res, next) => {
   next(createError(404));
