@@ -3,6 +3,7 @@ const path = require("path");
 const createError = require("http-errors");
 const morgan = require("morgan");
 const cookieParser = require("cookie-parser");
+const { Client } = require("pg");
 
 const express = require("express");
 const app = express();
@@ -38,11 +39,13 @@ const landingRoutes = require("./routes/landing");
 const authRoutes = require("./routes/authentication");
 const globalLobbyRoutes = require("./routes/global_lobby");
 const gameRoutes = require("./routes/game");
+const testRoutes = require("./routes/test/index.js");
 
 app.use("/", landingRoutes);
 app.use("/auth", authRoutes);
 app.use("/lobby", globalLobbyRoutes);
 app.use("/games", gameRoutes);
+app.use("/test", testRoutes);
 
 app.use((_req, _res, next) => {
   next(createError(404));
