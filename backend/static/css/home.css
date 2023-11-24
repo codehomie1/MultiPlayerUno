@@ -1,3 +1,92 @@
 * {
-  background-color: antiquewhite;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Arial', sans-serif;
+}
+
+body {
+  background-color: #f4f4f4;
+  color: #333;
+  line-height: 1.6;
+  padding: 20px;
+}
+
+/* Header styles */
+h1, h2 {
+  color: white;
+}
+
+h1 {
+  margin-bottom: 10px;
+}
+
+.container {
+  background: #333;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Navigation styles */
+ul {
+  list-style: none;
+  background: #333;
+  text-align: center;
+  margin-bottom: 20px;
+  padding: 10px 0;
+}
+
+ul li {
+  display: inline;
+}
+
+ul li a {
+  color: white;
+  padding: 5px 20px;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+ul li a:hover {
+  background: #555;
+  transition: background 0.3s;
+}
+
+/* Form styles */
+form {
+  max-width: 400px;
+  margin: 20px auto;
+}
+
+form input[type="text"],
+form input[type="password"] {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+}
+
+form input[type="submit"] {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background: #333;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+form input[type="submit"]:hover {
+  background: #555;
+  transition: background 0.3s;
+}
+
+/* Image styles */
+img {
+  max-width: 100%;
+  height: auto;
 }
