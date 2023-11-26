@@ -1,27 +1,39 @@
 <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Landing Page</title>
-        <link rel="stylesheet" href="../static/css/home.css">
-        <script src="/js/bundle.js"></script>
-    </head>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Landing Page</title>
+    <link rel="stylesheet" href="/css/home.css">
+    <script src="/js/main.js" defer></script>
+
+</head>
+
+<body>
     <body>
-        <div class="container">
-            <h1> 
-                Hello <% if (name === null) { %> User <% } else { %><%= name %><%}%>
-                Welcome to Uno Landing Page
-            </h1>
-            <img src="/images/favicon.ico" alt="Reddit icon">
+        
+        <div class="main-content">
+            <div class="title">
+                <h1> Welcome to UNO </h1>
+                <img src="/images/UNO_Logo.svg.png" alt="Uno icon" width="400" height="400">
+            </div>
+            <my-header></my-header>
+
+            <div class="title">
+                Hello <% if (name === null) { %> User, <% } else { %><%= name, %><%}%>
+                Welcome to Uno Home Page
+                
+                <!-- Use to Test if User in Signed in -->
+                <!-- 
+                    Hello <%= name ? name : "Billy" %>, Welcome to Uno Home Page 
+                -->
+
+            </div>
         </div>
+    
 
+   
+    <my-footer></my-footer>
+</body>
 
-        <ul>
-            <li><a href="/">Landing</a></li>
-            <li><a href="/auth/sign_up">Sign-up</a></li>
-            <li><a href="/lobby">Lobby</a></li>
-            <li><a href="/games/42">Game 42</a></li>
-        </ul>
-    </body>
 </html>

@@ -2,7 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Arial', sans-serif;
+  font-family: "Arial", sans-serif;
 }
 
 body {
@@ -12,16 +12,24 @@ body {
   padding: 20px;
 }
 
+.main-content {
+  flex: 1; /* This will make only the main content expand */
+}
+
 /* Header styles */
-h1, h2 {
+h1,
+h2 {
+  text-align: center;
   color: white;
 }
 
 h1 {
+  font-size: 48px;
   margin-bottom: 10px;
 }
 
-.container {
+.title {
+  font-size: 20px;
   background: #333;
   color: white;
   padding: 20px;
@@ -31,6 +39,7 @@ h1 {
 
 /* Navigation styles */
 ul {
+  font-size: 24px;
   list-style: none;
   background: #333;
   text-align: center;
@@ -70,6 +79,7 @@ form input[type="password"] {
 }
 
 form input[type="submit"] {
+  font-size: 24px;
   display: block;
   width: 100%;
   padding: 10px;
@@ -78,6 +88,8 @@ form input[type="submit"] {
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 form input[type="submit"]:hover {
@@ -89,4 +101,51 @@ form input[type="submit"]:hover {
 img {
   max-width: 100%;
   height: auto;
+}
+
+.input-label {
+  margin-left: 5px;
+  font-size: 24px;
+}
+
+.input-entry {
+  font-size: 24px;
+}
+
+/* Footer */
+html,
+body {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-footer {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 20px;
+  width: 100%;
+}
+
+/* Find Game Button*/
+.find-game-button-container {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.find-game-button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 24px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.find-game-button:hover {
+  background-color: #45a049;
 }

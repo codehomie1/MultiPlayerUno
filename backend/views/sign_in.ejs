@@ -15,29 +15,25 @@
 
     <div class="title">
         <h1> 
-            Sign Up Page
+            Sign In Page
         </h1>
     </div>
     <my-header></my-header>
 
 
-    <form action="/auth/sign_up" method="post">
+    <form action="/auth/sign_in" method="post">
         <div class=input-label>
             Username
         </div>
         <input class="input-entry" type="text" name="" id="" placeholder="Username">
-        
         <div class=input-label>
             Password
         </div>
         <input class="input-entry" type="password" name="" id="" placeholder="Password">
-        
-        <div class=input-label>
-            Confirm Password
+        <input type="submit" value="Sign In">
+        <div class="register-prompt">
+            Don't have an account? <a href="/auth/sign_up">Click here</a>
         </div>
-        <input class="input-entry" type="password" name="" id="" placeholder="Confirm Password">
-        
-        <input type="submit" value="Sign Up">
     </form>
     </div>
 
