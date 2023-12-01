@@ -6,34 +6,22 @@
     <title>Landing Page</title>
     <link rel="stylesheet" href="/css/home.css">
     <script src="/js/main.js" defer></script>
-
 </head>
 
 <body>
-    <body>
-        
-        <div class="main-content">
-            <div class="title">
-                <h1> Welcome to UNO </h1>
-                <img src="/images/UNO_Logo.svg.png" alt="Uno icon" width="400" height="400">
-            </div>
-            <my-header></my-header>
+    <my-header></my-header>
 
-            <div class="title">
-                Hello <% if (name === null) { %> User, <% } else { %><%= name, %><%}%>
-                Welcome to Uno Home Page
-                
-                <!-- Use to Test if User in Signed in -->
-                <!-- 
-                    Hello <%= name ? name : "Billy" %>, Welcome to Uno Home Page 
-                -->
-
-            </div>
+    <div class="container-center">
+        <div class="content">
+            <img src="/images/UNO_logo.webp" alt="Uno icon" width="350" height="350">
         </div>
-    
 
-   
+        <div class="content-welcome">
+            Hello <% if (name === null) { %> User, <% } else { %> <%= name, %> <% } %>
+            Welcome to Uno Home Page
+        </div>
+    </div>
+
     <my-footer></my-footer>
 </body>
-
 </html>

@@ -11,36 +11,86 @@
 </head>
 
 <body>
-    <div class="main-content">
-
-    <div class="title">
-        <h1> 
-            Sign Up Page
-        </h1>
-    </div>
     <my-header></my-header>
 
+    <div class="container-center">
 
-    <form action="/auth/sign_up" method="post">
-        <div class=input-label>
-            Username
-        </div>
-        <input class="input-entry" type="text" name="" id="" placeholder="Username">
+        <h1 class="header-pages"> 
+            Sign Up Page
+        </h1>
+
+        <form action="/auth/sign_up" method="post">
+            <div class="form-group">
+                <input type="text" id="contact-name" name="contact-name" class="form-control" placeholder=" " required>
+                <label for="contact-name" class="form-label">Username</label>
+            </div>
+            
+            <div class="form-group">
+                <input type="email" id="email" name="email" class="form-control" placeholder=" " required>
+                <label for="email" class="form-label">Email</label>
+                <span id="email-error" class="error-message"></span>
+            </div>
+            
+            <div class="form-group">
+                <input type="password" id="password" name="password" class="form-control" placeholder=" " required>
+                <label for="password" class="form-label">Password</label>
+                <span id="password-error" class="error-message"></span>
+            </div>
+            
+            <div class="form-group">
+                <input type="password" id="confirm-password" name="confirm-password" class="form-control" placeholder=" " required>
+                <label for="confirm-password" class="form-label">Confirm Password</label>
+                <span id="confirm-password-error" class="error-message"></span>
+            </div>
+        </form>
         
-        <div class=input-label>
-            Password
+        <div class="registerButton">
+            <button type="submit" class="submitButton">Register</button>
         </div>
-        <input class="input-entry" type="password" name="" id="" placeholder="Password">
         
-        <div class=input-label>
-            Confirm Password
+        <div class="register-prompt">
+            Already have an account? <a href="/auth/sign_in">Login here</a>
         </div>
-        <input class="input-entry" type="password" name="" id="" placeholder="Confirm Password">
-        
-        <input type="submit" value="Sign Up">
-    </form>
     </div>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const emailInput = document.getElementById('email');
+            const passwordInput = document.getElementById('password');
+            const confirmPasswordInput = document.getElementById('confirm-password');
+    
+            emailInput.addEventListener('blur', function() {
+                if (!validateEmail(this.value)) {
+                    document.getElementById('email-error').textContent = 'Please enter a valid email address.';
+                } else {
+                    document.getElementById('email-error').textContent = '';
+                }
+            });
+    
+            passwordInput.addEventListener('blur', function() {
+                if (this.value.length < 8) {
+                    document.getElementById('password-error').textContent = 'Password must be at least 8 characters.';
+                } else {
+                    document.getElementById('password-error').textContent = '';
+                }
+            });
+    
+            confirmPasswordInput.addEventListener('blur', function() {
+                if (this.value !== passwordInput.value) {
+                    document.getElementById('confirm-password-error').textContent = 'Passwords do not match.';
+                } else {
+                    document.getElementById('confirm-password-error').textContent = '';
+                }
+            });
+        });
+    
+        // Helper function to validate email
+        function validateEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+    
+        </script>
     <my-footer></my-footer>
 </body>
 </html>

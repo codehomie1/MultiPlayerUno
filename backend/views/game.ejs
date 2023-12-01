@@ -10,15 +10,26 @@
 
 </head>
 <body>
-    <div class="main-content">
-
-    <div class="title">
-        <h1>Welcome to game page</h1>
-        <h2>Game id <%= game_id %></h2>
-
-    </div>
     <my-header></my-header>
 
+    <div class="container-center">
+        <h1 class="header-pages">
+            Welcome to game page
+        </h1>
+        <h2 class="header-pages">Game id <%= game_id %></h2>
+    </div>
+
+    <div class="chat-box">
+        <div class="chat-header">
+            <h2>Chat</h2>
+        </div>
+        <div class="chat-messages" id="chatMessages">
+            <!-- Chat messages will be appended here -->
+        </div>
+        <form class="chat-form" id="chatForm">
+            <input type="text" id="chatInput" placeholder="Type a message..." autocomplete="off">
+            <button type="submit">Send</button>
+        </form>
     </div>
 
     <my-footer></my-footer>

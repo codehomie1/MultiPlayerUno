@@ -11,30 +11,34 @@
 </head>
 
 <body>
-    <div class="main-content">
+    <my-header></my-header>
 
-    <div class="title">
-        <h1> 
+    <div class="container-center">
+
+        <h1 class="header-pages"> 
             Sign In Page
         </h1>
-    </div>
-    <my-header></my-header>
 
 
     <form action="/auth/sign_in" method="post">
-        <div class=input-label>
-            Username
+        <div class="form-group">
+            <input type="email" id="email" name="email" class="form-control" placeholder=" " required>
+            <label for="email" class="form-label">Email</label>
         </div>
-        <input class="input-entry" type="text" name="" id="" placeholder="Username">
-        <div class=input-label>
-            Password
+
+        <div class="form-group">
+            <input type="password" id="password" name="password" class="form-control" placeholder=" " required>
+            <label for="password" class="form-label">Password</label>
         </div>
-        <input class="input-entry" type="password" name="" id="" placeholder="Password">
-        <input type="submit" value="Sign In">
-        <div class="register-prompt">
-            Don't have an account? <a href="/auth/sign_up">Click here</a>
+
+        <div class="form-group">
+            <button type="submit" class="submitButton">Login</button>
         </div>
     </form>
+        
+        <div class="register-prompt">
+            Not registered? <a href="/auth/sign_up">Click here</a>
+        </div>
     </div>
 
     <my-footer></my-footer>
