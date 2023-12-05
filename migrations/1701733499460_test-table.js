@@ -27,4 +27,6 @@ exports.up = (pgm) => {
  *
  *  this is to undo the change to the database structure
  */
-exports.down = (pgm) => {};
+exports.down = (pgm) => {
+  pgm.dropTable("test_table");
+};
