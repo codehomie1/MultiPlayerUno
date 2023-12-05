@@ -45,7 +45,7 @@ app.use("/", landingRoutes);
 app.use("/auth", authRoutes);
 app.use("/lobby", globalLobbyRoutes);
 app.use("/games", gameRoutes);
-app.use("/test", testRoutes);
+app.use("/db", testRoutes);
 
 app.use((_req, _res, next) => {
   next(createError(404));
