@@ -16,7 +16,7 @@ exports.up = (pgm) => {
       unique: true,
     },
     password: {
-      type: "char(60)",
+      type: "varchar(60)",
       notNull: true,
     },
     created_at: {
