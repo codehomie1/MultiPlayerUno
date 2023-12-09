@@ -38,9 +38,9 @@
             </div>
             
             <div class="form-group">
-                <input type="password" id="confirm-password" name="confirm-password" class="form-control" placeholder=" " >
-                <label for="confirm-password" class="form-label">Confirm Password</label>
-                <span id="confirm-password-error" class="error-message"></span>
+                <input type="password" id="confirm_password" name="confirm_password" class="form-control" placeholder=" " >
+                <label for="confirm_password" class="form-label">Confirm Password</label>
+                <span id="confirm_password-error" class="error-message"></span>
             </div>
             <div class="registerButton">
                 <button type="submit" class="submitButton">Register</button>
@@ -58,7 +58,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             const emailInput = document.getElementById('email');
             const passwordInput = document.getElementById('password');
-            const confirmPasswordInput = document.getElementById('confirm-password');
+            const confirmPasswordInput = document.getElementById('confirm_password');
     
             emailInput.addEventListener('blur', function() {
                 if (!validateEmail(this.value)) {
@@ -78,9 +78,9 @@
     
             confirmPasswordInput.addEventListener('blur', function() {
                 if (this.value !== passwordInput.value) {
-                    document.getElementById('confirm-password-error').textContent = 'Passwords do not match.';
+                    document.getElementById('confirm_password-error').textContent = 'Passwords do not match.';
                 } else {
-                    document.getElementById('confirm-password-error').textContent = '';
+                    document.getElementById('confirm_password-error').textContent = '';
                 }
             });
         });
