@@ -15,15 +15,15 @@ router.get("/sign_in", (req, res) => {
 
 router.post("/sign_up", async (req, res) => {
   // given a clear text password, encrypt and check for credential
-  const { email, password, username } = req.body;
+  const { email, password, username, confirm_password } = req.body;
 
-  console.log({ email, username, password });
+  console.log({ email, username, password, confirm_password });
   console.log(req.body);
 
   // first check if they exist and redirect to sign in
   const user_exists = await Users.email_exists(email);
   if (user_exists) {
-    res.redirect(`/:${username}`);
+    res.redirect(`/${username}`);
     return;
   }
 
@@ -32,7 +32,7 @@ router.post("/sign_up", async (req, res) => {
   const hash = await bcrypt.hash(password, salt);
 
   // Store in the DB
-  const { id } = Users.create(email, hash);
+  const { id } = Users.create(username, email, hash);
 
   // Store in session
 
@@ -48,21 +48,22 @@ router.post("/sign_in", async (req, res) => {
 
   try {
     const user = await Users.find_by_email(email);
-    const isValidUser = await bcrypt.compare(password, user.password);
+    console.log(user);
+    const isValidUser = password == user.password ? true : false;
+    // TODO: ADD BYcrypt compare after inserting new users
 
     if (isValidUser) {
       // TODO : Store in session
-
-      response.redirect("/lobby");
+      req.username = user.username;
+      res.redirect("/lobby/" + req.username);
       return;
     } else {
-      response.redirect("/landing", {
-        error: "The credentials you supplied are invalid.",
-      });
+      // TODO: INVALID credentials, try to add to front-end
+      res.render("sign_in");
     }
   } catch (error) {
     console.log(error);
-    res.redirect("/");
+    res.render("sign_in");
   }
 });
 
