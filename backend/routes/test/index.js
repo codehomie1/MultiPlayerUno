@@ -24,11 +24,17 @@ router.get("/insert_test_table", (_request, response) => {
 
 router.get("/show_users", (_request, response) => {
   db.any(`SELECT * FROM users`)
-    .then((results) => console.log(results))
+    .then((results) => {
+      response.json(results);
+      console.log(results);
+    })
     .catch((error) => {
       console.log(error);
       response.json({ error });
     });
 });
+
+// Todo: add script to insert new_user
+router.get("create_user/:uname:email:password", (req, res) => {});
 
 module.exports = router;
