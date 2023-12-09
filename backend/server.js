@@ -41,7 +41,7 @@ const globalLobbyRoutes = require("./routes/global_lobby");
 const gameRoutes = require("./routes/game");
 const testRoutes = require("./routes/test/index.js");
 
-app.use("/", landingRoutes);
+app.use(["/landing", "/"], landingRoutes);
 app.use("/auth", authRoutes);
 app.use("/lobby", globalLobbyRoutes);
 app.use("/games", gameRoutes);
