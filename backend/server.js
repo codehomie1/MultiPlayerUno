@@ -4,25 +4,28 @@ const createError = require("http-errors");
 const morgan = require("morgan");
 const cookieParser = require("cookie-parser");
 const { Client } = require("pg");
+const session = require("express-session");
+const PORT = process.env.PORT || 3000;
+
+const { viewSessionData } = require("./middleware/view-session.js");
+// app.use(viewSessionData);
 
 const express = require("express");
 const app = express();
-app.use(morgan("dev"));
 
+app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-
-const PORT = process.env.PORT || 3000;
-
+app.use(express.static(path.join(__dirname, "static")));
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
 if (process.env.NODE_ENV === "development") {
   const livereload = require("livereload");
   const connectLiveReload = require("connect-livereload");
-
   const liveReloadServer = livereload.createServer();
+
   liveReloadServer.watch(path.join(__dirname, "backend", "static"));
   liveReloadServer.server.once("connection", () => {
     setTimeout(() => {
@@ -33,7 +36,18 @@ if (process.env.NODE_ENV === "development") {
   app.use(connectLiveReload());
 }
 
-app.use(express.static(path.join(__dirname, "static")));
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    saveUninitialized: true,
+    resave: false,
+    cookie: { secure: process.env.NODE_ENV !== "development" },
+  }),
+);
+
+if (process.env.NODE_ENV === "development") {
+  app.use(viewSessionData);
+}
 
 const landingRoutes = require("./routes/landing");
 const authRoutes = require("./routes/authentication");
