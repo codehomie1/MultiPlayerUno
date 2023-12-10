@@ -23,7 +23,7 @@ router.post("/sign_up", async (req, res) => {
   // first check if they exist and redirect to sign in
   const user_exists = await Users.email_exists(email);
   if (user_exists) {
-    res.redirect(`/${username}`);
+    res.redirect(`/lobby/` + username);
     return;
   }
 
@@ -35,6 +35,11 @@ router.post("/sign_up", async (req, res) => {
   const { id } = Users.create(username, email, hash);
 
   // Store in session
+  req.session.user = {
+    id,
+    username,
+    email,
+  };
 
   // Redirect to Lobby
   console.log(req.body);
@@ -53,18 +58,37 @@ router.post("/sign_in", async (req, res) => {
     // TODO: ADD BYcrypt compare after inserting new users
 
     if (isValidUser) {
-      // TODO : Store in session
-      req.username = user.username;
-      res.redirect("/lobby/" + req.username);
+      // Store user in session
+      req.session.user = {
+        id: user["id"],
+        username: user["username"],
+        email,
+      };
+
+      console.log({ user, session: req.session });
+
+      res.redirect("/lobby/" + user.username);
       return;
     } else {
       // TODO: INVALID credentials, try to add to front-end
-      res.render("sign_in");
+      res.render("sign_in", {
+        error: "The credentials you supplied are invalid.",
+      });
     }
   } catch (error) {
     console.log(error);
-    res.render("sign_in");
+    // TODO: INVALID credentials, try to add to front-end
+    res.render("sign_in", {
+      error: "The credentials you supplied are invalid.",
+    });
   }
+});
+
+// TODO: ADD TO FRONTEND : logout endpoint
+router.get("/logout", (req, res) => {
+  req.session.destroy();
+
+  res.redirect("/landing");
 });
 
 module.exports = router;
