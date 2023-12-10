@@ -8,7 +8,8 @@ const session = require("express-session");
 const PORT = process.env.PORT || 3000;
 
 const { viewSessionData } = require("./middleware/view-session.js");
-// app.use(viewSessionData);
+const { sessionLocals } = require("./middleware/session-locals.js");
+const { isAuthenticated } = require("./middleware/is-authenticated.js");
 
 const express = require("express");
 const app = express();
@@ -38,27 +39,35 @@ if (process.env.NODE_ENV === "development") {
 
 app.use(
   session({
+    store: new (require("connect-pg-simple")(session))({
+      createTableIfMissing: true,
+    }),
     secret: process.env.SESSION_SECRET,
     saveUninitialized: true,
     resave: false,
-    cookie: { secure: process.env.NODE_ENV !== "development" },
+    cookie: { secure: process.env.NODE_ENV != "development" },
   }),
 );
 
-if (process.env.NODE_ENV === "development") {
+if (process.env.NODE_ENV == "development") {
   app.use(viewSessionData);
 }
 
+app.use(sessionLocals);
+
 const landingRoutes = require("./routes/landing");
 const authRoutes = require("./routes/authentication");
-const globalLobbyRoutes = require("./routes/global_lobby");
+const lobbyRoutes = require("./routes/lobby");
 const gameRoutes = require("./routes/game");
 const testRoutes = require("./routes/test/index.js");
 
 app.use(["/landing", "/"], landingRoutes);
 app.use("/auth", authRoutes);
-app.use("/lobby", globalLobbyRoutes);
-app.use("/games", gameRoutes);
+
+// must be authenticated to get to lobby and games route
+app.use("/lobby", isAuthenticated, lobbyRoutes);
+app.use("/games", isAuthenticated, gameRoutes);
+
 app.use("/db", testRoutes);
 
 app.use((_req, _res, next) => {
