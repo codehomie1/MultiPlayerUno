@@ -87,6 +87,7 @@ class MyHeader extends HTMLElement {
     //     this.setSidebarContent(navBarContent); // Fallback to not logged in nav bar
     //   });
 
+    // commented out because it always gave 404 error
     this.setSidebarContent(navBarContent); // Fallback to not logged in nav bar
   }
 
