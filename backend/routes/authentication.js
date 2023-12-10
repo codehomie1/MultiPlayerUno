@@ -53,7 +53,6 @@ router.post("/sign_in", async (req, res) => {
 
   try {
     const user = await Users.find_by_email(email);
-    console.log(user);
     const isValidUser = password == user.password ? true : false;
     // TODO: ADD BYcrypt compare after inserting new users
 
@@ -67,8 +66,7 @@ router.post("/sign_in", async (req, res) => {
 
       console.log({ user, session: req.session });
 
-      res.redirect("/lobby/" + user.username);
-      return;
+      res.redirect("/lobby");
     } else {
       // TODO: INVALID credentials, try to add to front-end
       res.render("sign_in", {
