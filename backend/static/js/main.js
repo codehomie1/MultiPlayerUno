@@ -62,30 +62,32 @@ class MyHeader extends HTMLElement {
 
     var finalNavBar = navBarContent;
 
-    fetch(`/users/currentUserInfo`)
-      .then((response) => response.json())
-      .then((data) => {
-        let finalNavBar = navBarContent; // Initialize with the default navbar
-        try {
-          console.log("Retrieved userId: " + data.userId);
-          if (data.userId == void 0) {
-            console.log("Nav bar set for someone not logged in.");
-          } else {
-          }
-          // Call setSidebarContent to update the sidebar with the correct navbar
-          this.setSidebarContent(finalNavBar);
-        } catch (error) {
-          console.error(error);
-          console.log(
-            "Error, resorting to default nav bar (user not logged in)",
-          );
-          this.setSidebarContent(navBarContent);
-        }
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-        this.setSidebarContent(navBarContent); // Fallback to not logged in nav bar
-      });
+    // fetch(`/users/currentUserInfo`)
+    //   .then((response) => response.json())
+    //   .then((data) => {
+    //     let finalNavBar = navBarContent; // Initialize with the default navbar
+    //     try {
+    //       console.log("Retrieved userId: " + data.userId);
+    //       if (data.userId == void 0) {
+    //         console.log("Nav bar set for someone not logged in.");
+    //       } else {
+    //       }
+    //       // Call setSidebarContent to update the sidebar with the correct navbar
+    //       this.setSidebarContent(finalNavBar);
+    //     } catch (error) {
+    //       console.error(error);
+    //       console.log(
+    //         "Error, resorting to default nav bar (user not logged in)",
+    //       );
+    //       this.setSidebarContent(navBarContent);
+    //     }
+    //   })
+    //   .catch((error) => {
+    //     console.error("Error:", error);
+    //     this.setSidebarContent(navBarContent); // Fallback to not logged in nav bar
+    //   });
+
+    this.setSidebarContent(navBarContent); // Fallback to not logged in nav bar
   }
 
   // This method updates the sidebar's HTML content
