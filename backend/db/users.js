@@ -1,27 +1,18 @@
-const db = require("./connections");
+const db = require("./connection.js");
 
-const USERS_EXISTENCE = `SELECT COUNT(*) 
-FROM users 
-WHERE email=$1 `;
+const create = (username, email, hash) =>
+  db.oneOrNone(
+    "INSERT INTO users (username, email, password) VALUES ($1, $2, $3) RETURNING id",
+    [username, email, hash]
+  );
 
-const ADD_USER = `INSERT INTO users (email, password) 
-VALUES ($1, $2) 
-RETURNING id, email`;
-
-const SIGN_USER_IN = `SELECT * FROM users 
-WHERE email=$1`;
-
-const email_exists = (email) =>
-  db
-    .one(USERS_EXISTENCE, [email])
-    .then((_) => true)
-    .catch((_) => false);
-
-const create = () => db.one(ADD_USER, [email, password]);
-const find_by_email = (email) => db.one(SIGN_USER_IN, [email]);
+const findByEmailOrUsername = (email, oldUsername) =>
+  db.oneOrNone("SELECT * FROM users WHERE email=$1 OR username=$2", [
+    email,
+    oldUsername,
+  ]);
 
 module.exports = {
-  email_exists,
   create,
-  find_by_email,
+  findByEmailOrUsername,
 };

@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node ./backend/server.js",
+    "db:initcards": "node ./backend/db/initCards.js",
     "build": "webpack",
     "build:dev": "webpack --watch",
     "server:dev": "set NODE_ENV=development && nodemon ./backend/server.js",
@@ -23,15 +24,19 @@
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.1",
+    "connect-pg-simple": "^9.0.1",
+    "connection": "^1.4.0",
     "cookie-parser": "^1.4.6",
     "dotenv": "^16.3.1",
     "ejs": "^3.1.9",
     "express": "^4.18.2",
+    "express-session": "^1.17.3",
     "http-errors": "^2.0.0",
     "morgan": "^1.10.0",
     "node-pg-migrate": "^6.2.2",
     "pg": "^8.11.3",
-    "pg-promise": "^11.5.4"
+    "pg-promise": "^11.5.4",
+    "socket.io": "^4.7.2"
   },
   "devDependencies": {
     "babel-loader": "^9.1.3",
