@@ -5,39 +5,6 @@ const Users = require("../db/users.js");
 const User = {};
 const SALT_ROUNDS = 10;
 
-const register = async () => {
-  const form = document.getElementById("register-form");
-  const formData = new FormData(form);
-  const formDataJson = {};
-
-  for (const [key, val] of formData) {
-    formDataJson[key] = val;
-  }
-
-  const options = {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(formDataJson),
-  };
-
-  try{
-    const result = await fetch(`/api/users/register`, options);
-    const data = await res.json();
-
-    if (data.status === 400 || data.status === 500) {
-      showMessageAuth(data);
-      return;
-    }
-
-    localStorage.setItem("user", JSON.stringify(data.user));
-    window.location.href = data.url;
-  } catch (err) {
-    console.log(err);
-  }
-};
-
 User.register = async (req, res) => {
   const { username, password } = req.body;
   const email = req.body.email;
@@ -60,9 +27,9 @@ User.register = async (req, res) => {
       username,
       email,
     };
-    
+    console.log("AUTHENTICATION.JS LANDING");
     res.send({
-      url: "/lobby",
+      url: "/landing",
       status: 200,
       user: { username: username, id: id },
     });

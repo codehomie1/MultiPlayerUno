@@ -91,32 +91,6 @@ class MyHeader extends HTMLElement {
     });
   }
 
-  async isUserSignedIn() {
-    return false;
-    this.navBarContent();
-  }
-
-  async logoutUser() {
-    // Still need to implement logout logic
-    console.log("Logging out...");
-    try{
-      const response = await fetch('/auth/logout');
-      const data = await response.json();
-
-      if (data.message === 'Logout successful') {
-        console.log("Logout Successful");
-
-        window.location.href = '/auth/sign_in';
-      } else {
-        console.error("Logout failed");
-      }
-
-      this.fetchNavBar();
-    } catch (error) {
-      console.log("Error during logout: ", error);
-    }
-    // this.render();
-  }
 };
 
 customElements.define("my-header", MyHeader);

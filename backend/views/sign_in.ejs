@@ -20,7 +20,8 @@
         </h1>
 
 
-    <form action="/auth/sign_in" method="post">
+    <!-- <form action="/auth/sign_in" method="post"> -->
+    <form id="signin-form" on_submit="signin(); return false;">
         <div class="form-group">
             <input type="email" id="email" name="email" class="form-control" placeholder=" " required>
             <label for="email" class="form-label">Email</label>

@@ -59,9 +59,11 @@ const userRoutes = require("./routes/connect/auth");
 const lobbyRoutes = require("./routes/lobby");
 const gameRoutes = require("./routes/game");
 const testRoutes = require("./routes/test/index");
+const users = require("./routes/users.js");
 app.use("/lobby", isAuthenticated, lobbyRoutes);
 app.use("/games", isAuthenticated, gameRoutes);
 app.use("/auth", userRoutes);
+app.use("/api/users", users);
 
 
 app.use(["/landing", "/"], landingRoutes);
