@@ -54,19 +54,17 @@ if (process.env.NODE_ENV == "development") {
 }
 
 app.use(sessionLocals);
-
 const landingRoutes = require("./routes/landing");
-const authRoutes = require("./routes/authentication");
+const userRoutes = require("./routes/connect/auth");
 const lobbyRoutes = require("./routes/lobby");
 const gameRoutes = require("./routes/game");
-const testRoutes = require("./routes/test/index.js");
-
-app.use(["/landing", "/"], landingRoutes);
-app.use("/auth", authRoutes);
-
-// must be authenticated to get to lobby and games route
+const testRoutes = require("./routes/test/index");
 app.use("/lobby", isAuthenticated, lobbyRoutes);
 app.use("/games", isAuthenticated, gameRoutes);
+app.use("/auth", userRoutes);
+
+
+app.use(["/landing", "/"], landingRoutes);
 
 app.use("/db", testRoutes);
 

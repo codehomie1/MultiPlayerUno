@@ -34,7 +34,7 @@ class MyHeader extends HTMLElement {
   }
 
   fetchNavBar() {
-    const userIsSignedIn = this.isUserSignedIn();
+    const userIsSignedIn = false;
     // Define the navbar content
     const navBarContent = `
       <h2> UNO Game </h2>
@@ -62,32 +62,6 @@ class MyHeader extends HTMLElement {
 
     var finalNavBar = navBarContent;
 
-    // fetch(`/users/currentUserInfo`)
-    //   .then((response) => response.json())
-    //   .then((data) => {
-    //     let finalNavBar = navBarContent; // Initialize with the default navbar
-    //     try {
-    //       console.log("Retrieved userId: " + data.userId);
-    //       if (data.userId == void 0) {
-    //         console.log("Nav bar set for someone not logged in.");
-    //       } else {
-    //       }
-    //       // Call setSidebarContent to update the sidebar with the correct navbar
-    //       this.setSidebarContent(finalNavBar);
-    //     } catch (error) {
-    //       console.error(error);
-    //       console.log(
-    //         "Error, resorting to default nav bar (user not logged in)",
-    //       );
-    //       this.setSidebarContent(navBarContent);
-    //     }
-    //   })
-    //   .catch((error) => {
-    //     console.error("Error:", error);
-    //     this.setSidebarContent(navBarContent); // Fallback to not logged in nav bar
-    //   });
-
-    // commented out because it always gave 404 error
     this.setSidebarContent(navBarContent); // Fallback to not logged in nav bar
   }
 
@@ -117,17 +91,33 @@ class MyHeader extends HTMLElement {
     });
   }
 
-  isUserSignedIn() {
-    // Implement your check here
-    return false; // Update with actual logic, currently only for testing purposes
+  async isUserSignedIn() {
+    return false;
+    this.navBarContent();
   }
 
-  logoutUser() {
+  async logoutUser() {
     // Still need to implement logout logic
     console.log("Logging out...");
-    this.render();
+    try{
+      const response = await fetch('/auth/logout');
+      const data = await response.json();
+
+      if (data.message === 'Logout successful') {
+        console.log("Logout Successful");
+
+        window.location.href = '/auth/sign_in';
+      } else {
+        console.error("Logout failed");
+      }
+
+      this.fetchNavBar();
+    } catch (error) {
+      console.log("Error during logout: ", error);
+    }
+    // this.render();
   }
-}
+};
 
 customElements.define("my-header", MyHeader);
 

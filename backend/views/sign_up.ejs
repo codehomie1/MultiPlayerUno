@@ -19,7 +19,8 @@
             Sign Up Page
         </h1>
 
-        <form action="/auth/sign_up" method="post">
+        <!-- <form id="register-form" action="/auth/sign_up" method="post"> -->
+        <form id="register-form" on_submit="register(); return false;">
             <div class="form-group">
                 <input type="text" id="username" name="username" class="form-control" placeholder=" " >
                 <label for="username" class="form-label">Username</label>
@@ -91,7 +92,7 @@
             return emailRegex.test(email);
         }
     
-        </script>
+    </script>
     <my-footer></my-footer>
 </body>
 </html>
