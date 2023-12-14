@@ -14,8 +14,10 @@ class MyHeader extends HTMLElement {
         </h1>
       </div>
     `;
+
     this.addEventListeners();
     this.fetchNavBar();
+    this.checkUserSignInStatus();
   }
 
   addEventListeners() {
@@ -33,62 +35,41 @@ class MyHeader extends HTMLElement {
     });
   }
 
+  setUserSignedIn(isSignedIn) {
+    this.userIsSignedIn = isSignedIn;
+    this.fetchNavBar();
+  }
+
   fetchNavBar() {
     const userIsSignedIn = this.isUserSignedIn();
-    // Define the navbar content
+
+    // Define the navbar content with conditional rendering
     const navBarContent = `
       <h2> UNO Game </h2>
       <ul>
         <li><a href="/">Home</a></li>
-        <li><a href="/lobby">Lobby</a></li>
-        <li><a href="/games/42">Game 42</a></li>
         ${
           userIsSignedIn
-            ? '<li><a href="#" id="logoutButton">Logout</a></li>'
-            : '<li><a href="/auth/sign_up">Sign Up</a></li>' +
-              '<li><a href="/auth/sign_in">Sign In</a></li>'
+            ? `<li><a href="/lobby">Lobby</a></li>
+               <li><a href="/games/42">Game 42</a></li>
+               <li><a href="#" id="logoutButton">Logout</a></li>`
+            : `<li><a href="/auth/sign_up">Sign Up</a></li>
+               <li><a href="/auth/sign_in">Sign In</a></li>`
         }
       </ul>
     `;
 
-    // Add the logout event listener if the logout button is part of the navbar
-    const logoutButton = this.querySelector("#logoutButton");
-    if (logoutButton) {
-      logoutButton.addEventListener("click", (e) => {
-        e.preventDefault();
-        this.logoutUser();
-      });
+    this.setSidebarContent(navBarContent);
+
+    if (userIsSignedIn) {
+      const logoutButton = this.querySelector("#logoutButton");
+      if (logoutButton) {
+        logoutButton.addEventListener("click", (e) => {
+          e.preventDefault();
+          this.logoutUser();
+        });
+      }
     }
-
-    var finalNavBar = navBarContent;
-
-    // fetch(`/users/currentUserInfo`)
-    //   .then((response) => response.json())
-    //   .then((data) => {
-    //     let finalNavBar = navBarContent; // Initialize with the default navbar
-    //     try {
-    //       console.log("Retrieved userId: " + data.userId);
-    //       if (data.userId == void 0) {
-    //         console.log("Nav bar set for someone not logged in.");
-    //       } else {
-    //       }
-    //       // Call setSidebarContent to update the sidebar with the correct navbar
-    //       this.setSidebarContent(finalNavBar);
-    //     } catch (error) {
-    //       console.error(error);
-    //       console.log(
-    //         "Error, resorting to default nav bar (user not logged in)",
-    //       );
-    //       this.setSidebarContent(navBarContent);
-    //     }
-    //   })
-    //   .catch((error) => {
-    //     console.error("Error:", error);
-    //     this.setSidebarContent(navBarContent); // Fallback to not logged in nav bar
-    //   });
-
-    // commented out because it always gave 404 error
-    this.setSidebarContent(navBarContent); // Fallback to not logged in nav bar
   }
 
   // This method updates the sidebar's HTML content
@@ -117,15 +98,36 @@ class MyHeader extends HTMLElement {
     });
   }
 
+  async checkUserSignInStatus() {
+    try {
+      const response = await fetch("/status");
+      const data = await response.json();
+      this.setUserSignedIn(data.isAuthenticated);
+    } catch (error) {
+      console.error("Error:", error);
+      this.setUserSignedIn(false);
+    }
+  }
+
   isUserSignedIn() {
-    // Implement your check here
-    return false; // Update with actual logic, currently only for testing purposes
+    return this.userIsSignedIn;
   }
 
   logoutUser() {
-    // Still need to implement logout logic
-    console.log("Logging out...");
-    this.render();
+    // Make a request to the server's logout endpoint
+    fetch("/logout", { method: "GET" })
+      .then((response) => {
+        if (response.ok) {
+          // Successfully logged out, update the state and possibly redirect
+          this.setUserSignedIn(false);
+          window.location.href = "/landing"; // Redirect to a landing page or login page
+        } else {
+          console.error("Logout failed");
+        }
+      })
+      .catch((error) => {
+        console.error("Error logging out:", error);
+      });
   }
 }
 

@@ -109,4 +109,11 @@ router.get("/logout", (req, res) => {
   res.redirect("/landing");
 });
 
+router.get("/status", (req, res) => {
+  if (req.session && req.session.user) {
+    res.json({ isAuthenticated: true, user: req.session.user });
+  } else {
+    res.json({ isAuthenticated: false });
+  }
+});
 module.exports = router;
