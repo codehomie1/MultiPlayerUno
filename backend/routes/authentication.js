@@ -88,11 +88,11 @@ router.post("/sign_in", async (req, res) => {
       // console.log(req.session);
       // console.log('----------session in sign in-------');
 
-      res.redirect("/lobby/");
+      res.redirect("/lobby");
     } else {
       // send locals with error message saying user info
       // is invalid
-      res.render("/sign_in");
+      res.render("sign_in");
     }
   } catch (error) {
     // send locals with error message saying an unknown

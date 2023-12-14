@@ -6,7 +6,7 @@ router.get("/", (req, res) => {
   console.log(req.session);
   console.log("--------in lobby route ---------");
 
-  if (req.session.user.username) {
+  if (req.session.user !== undefined) {
     res.render("lobby", { name: req.session.user.username });
   }
 
