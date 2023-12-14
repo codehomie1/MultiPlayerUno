@@ -1,9 +1,10 @@
 const sessionLocals = (request, response, next) => {
-  // response.locals.user = request.session.user;
   console.log("-------------session Locals middle------------");
   if (request.session.user) {
-    response.locals = request.session.user;
-    console.log(response.locals);
+    response.locals.user = request.session.user;
+    console.log(response.locals.user);
+  } else {
+    console.log("no response locals user");
   }
   console.log("-------------session Locals middle------------");
   next();
