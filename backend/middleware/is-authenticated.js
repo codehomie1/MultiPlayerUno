@@ -1,10 +1,8 @@
 const isAuthenticated = (req, res, next) => {
-  if (req.session.user !== undefined) {
-    next();
-  } else {
-    console.log("NOT AUTHENTICATED.. going to landing");
-    res.redirect("/landing");
-  }
+  console.log("----------auth middleware-------------");
+  console.log(req.session);
+  console.log("----------auth middleware-------------");
+  next();
 };
 
 module.exports = { isAuthenticated };
