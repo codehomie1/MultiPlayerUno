@@ -90,12 +90,12 @@ router.post("/sign_in", async (req, res) => {
 
       res.redirect("/lobby");
     } else {
-      // send locals with error message saying user info
+      // TODO: send locals with error message saying user info
       // is invalid
       res.render("sign_in");
     }
   } catch (error) {
-    // send locals with error message saying an unknown
+    // TODO: send locals with error message saying an unknown
     // error occurred
     console.log(error);
     res.render("sign_in");
