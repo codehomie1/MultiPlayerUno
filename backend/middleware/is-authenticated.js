@@ -6,7 +6,12 @@ const isAuthenticated = (req, res, next) => {
     console.log(" no session user session");
   }
   console.log("----------auth middleware-------------");
-  next();
+
+  if (req.session.user !== undefined) {
+    next();
+  } else {
+    res.redirect("/auth/sign_in");
+  }
 };
 
 module.exports = { isAuthenticated };
