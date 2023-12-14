@@ -7,7 +7,7 @@
     "start": "node ./backend/server.js",
     "build": "webpack",
     "build:dev": "webpack --watch",
-    "server:dev": "set NODE_ENV=development && nodemon ./backend/server.js",
+    "server:dev": "set NODE_ENV=development&& nodemon ./backend/server.js",
     "start:dev": "concurrently \"npm:server:dev\" \"npm:build:dev\"",
     "prepare": "husky install",
     "db:create": "node-pg-migrate create -- ",
@@ -23,6 +23,7 @@
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.1",
+    "body-parser": "^1.20.2",
     "connect-pg-simple": "^9.0.1",
     "cookie-parser": "^1.4.6",
     "dotenv": "^16.3.1",
