@@ -3,28 +3,23 @@
 exports.shorthands = undefined;
 
 exports.up = (pgm) => {
-  pgm.createTable("session", {
+  pgm.createTable("sessions", {
     sid: {
       type: "varchar",
       notNull: true,
-      collation,
+      collation: "",
     },
-    sess: "",
-    expire: "",
+    sess: {
+      type: "jsonb",
+      notNull: true,
+    },
+    expire: {
+      type: "timestamp",
+      notNull: true,
+    },
   });
 };
 
 exports.down = (pgm) => {
   pgm.dropTable("session");
 };
-
-// CREATE TABLE "session" (
-//     "sid" varchar NOT NULL COLLATE "default",
-//     "sess" json NOT NULL,
-//     "expire" timestamp(6) NOT NULL
-//   )
-//   WITH (OIDS=FALSE);
-
-//   ALTER TABLE "session" ADD CONSTRAINT "session_pkey" PRIMARY KEY ("sid") NOT DEFERRABLE INITIALLY IMMEDIATE;
-
-//   CREATE INDEX "IDX_session_expire" ON "session" ("expire");
