@@ -19,20 +19,20 @@
             Sign Up Page
         </h1>
 
-        <form action="/auth/sign_up" method="post">
+        <form method="post" action="/auth/sign_up">
             <div class="form-group">
-                <input type="text" id="username" name="username" class="form-control" placeholder=" " >
+                <input type="text" id="username" name="username" class="form-control" placeholder="Username" >
                 <label for="username" class="form-label">Username</label>
             </div>
             
             <div class="form-group">
-                <input type="email" id="email" name="email" class="form-control" placeholder=" " required>
+                <input type="email" id="email" name="email" class="form-control" placeholder="Email" required>
                 <label for="email" class="form-label">Email</label>
                 <span id="email-error" class="error-message"></span>
             </div>
             
             <div class="form-group">
-                <input type="password" id="password" name="password" class="form-control" placeholder=" " required>
+                <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
                 <label for="password" class="form-label">Password</label>
                 <span id="password-error" class="error-message"></span>
             </div>
