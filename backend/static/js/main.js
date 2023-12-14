@@ -100,7 +100,7 @@ class MyHeader extends HTMLElement {
 
   async checkUserSignInStatus() {
     try {
-      const response = await fetch("/status");
+      const response = await fetch("/auth/status");
       const data = await response.json();
       this.setUserSignedIn(data.isAuthenticated);
     } catch (error) {
@@ -115,7 +115,7 @@ class MyHeader extends HTMLElement {
 
   logoutUser() {
     // Make a request to the server's logout endpoint
-    fetch("/logout", { method: "GET" })
+    fetch("/auth/logout", { method: "GET" })
       .then((response) => {
         if (response.ok) {
           // Successfully logged out, update the state and possibly redirect
