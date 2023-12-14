@@ -1,12 +1,13 @@
-const db = require("./connections");
+const database = require("./connections");
+const { connection: db, pgp } = database;
 
-const USERS_EXISTENCE = `SELECT COUNT(*) 
+const USERS_EXISTENCE = `SELECT email 
 FROM users 
-WHERE email=$1 `;
+WHERE email=$1`;
 
 const ADD_USER = `INSERT INTO users (username, email, password) 
 VALUES ($1, $2, $3) 
-RETURNING id, email`;
+RETURNING id, username, email`;
 
 const SIGN_USER_IN = `SELECT * FROM users 
 WHERE email=$1`;
@@ -17,8 +18,15 @@ const email_exists = (email) =>
     .then((_) => true)
     .catch((_) => false);
 
-const create = () => db.one(ADD_USER, [username, email, password]);
-const find_by_email = (email) => db.one(SIGN_USER_IN, [email]);
+const create = (username, email, password) =>
+  db.one(ADD_USER, [username, email, password]).then((res) => {
+    return res;
+  });
+
+const find_by_email = (email) =>
+  db.one(SIGN_USER_IN, [email]).then((res) => {
+    return res;
+  });
 
 module.exports = {
   email_exists,
