@@ -1,0 +1,140 @@
+
+
+1. user should sign in and redirect to lobby or landing
+2. lobby or landing should show user's username
+
+3. user info should be stored in req session obj
+
+4. users info should be stored in req locals obj
+
+
+progress:
+
+- fixed sessions tables
+- db migrate up
+- reset db to add new data
+
+- working on auth/signup endpoint POST 
+
+- visit get /auth/signup 
+ - add user info :
+        - derp
+        - derp@gmail.com
+        - password123
+        - password123
+
+expected behaviour:
+ - goto post signup endpoint
+ - print the req.body object that contains the information we added to the signup page
+   console.log({ 
+    email, username, password, confirm_password 
+    });
+ - return;
+
+ - successful  
+ {
+[server:dev]   email: 'derp@gmail.com',
+[server:dev]   username: 'derp',
+[server:dev]   password: 'password123',
+[server:dev]   confirm_password: 'password123'
+[server:dev] 
+}
+
+PART 2:
+
+- check if creating a new user works?
+  - redirects to lobby
+  - successful
+
+- check case where user does exist (data in the db)
+    - redirects to sign_in
+    - successful
+
+- encypt the clear text password
+ - successful
+
+3. store in the sessions and locals IN PROGRESS
+   - currently sessions obj only contains cookie
+     we want it to hold some user info as well such as username, email
+
+   - we also want to store some data in the locals 
+
+   - we are testing this by checking if the auth middleware has recieved the req.session obj
+    with the correct stuff
+
+    - we are also checking the session locals middleware for the same thing.
+
+
+4. SIGN IN 
+
+ - check if finding a user returns the correct obj 
+ - find_by email  returns entire obj { id, username, email, pass, created_at }
+ - bycrypt will check if password put in is equal to db password.
+    - sign in with derp1    
+    - test derp1@gmail.com 
+    - expected return derp1
+    - successful
+
+    - sign_in user that doesnt exist will rerender the sign_in page
+     - successful
+
+5. sessions stuff 
+
+- require it
+- use it as a middleware before routing
+
+session library sets a cookie that the client will send back
+the client also sends cookies back to the server. This gives us a way
+to have information about a client that we have given to a client previously.
+
+once we hook sessions we will have cookie, session id cookie.
+it will show in the browser.
+
+req.session :
+    to store or access the session data, simply use the request property req.session, 
+    which is json so nested objects are fine.
+
+TEST RETURNING ID FROM USERS CREATE:
+    - make sure to create new user
+successful
+
+TEST REQ.SESSION OBJ PRINTS CORRECT FIELDS
+    - sign in 
+        - successful
+    - sign up 
+        - successful
+     
+I need session obj to be saveddddd
+    - prof uses spread to save session (didnt work)
+    - prof tries returning id, email from SIGN USER IN
+        - remove return and select id, email instead
+        - removes again does select *
+    
+    - prof tries app view session at end
+    - try make secure change update secure? worked lamooo
+    - set secure field fixed it.
+
+sign in works
+    -saves session data
+    - gives error tho
+
+sign up 
+    -saves session data
+    - gives error tho
+
+
+so far------
+- req body goes to backend correctly
+- Users db file has methods implemented and works in auth/sign_up
+- user is created when registering post sign_up
+- User.create returns obj of fields returned from query (username , email)
+- user pass is hashed
+- user info stored in db
+- sign in works ( info stored in req body )
+- sign in correct user routes to lobby
+- sign in incorrect user routes back to sign in
+- bcrypt hash correctly checks hashed passwords
+
+
+    
+
