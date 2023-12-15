@@ -6,6 +6,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="/css/home.css">
     <script src="/js/main.js" defer></script>
+    <script src="/js/chat.js" defer></script>
 </head>
 <body>
     <my-header></my-header>
@@ -18,6 +19,20 @@
         <div class="form-group">
             <button id="findGameButton" class="submitButton">Find Game</button>
         </div>
+    </div>
+
+    <!-- add chat to lobby -->
+    <div class="chat-box">
+        <div class="chat-header">
+            <h2>Chat</h2>
+        </div>
+        <div class="chat-messages" id="chatMessages">
+            <!-- Chat messages will be appended here -->
+        </div>
+        <form class="chat-form" id="chatForm">
+            <input type="text" id="chatInput" placeholder="Type a message..." autocomplete="off">
+            <button class="chat-submit-btn" type="submit">Send</button>
+        </form>
     </div>
 
     <my-footer></my-footer>
