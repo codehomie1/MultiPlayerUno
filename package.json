@@ -13,11 +13,11 @@
     "db:create": "node-pg-migrate create -- ",
     "db:migrate": "node-pg-migrate up",
     "db:rollback": "node-pg-migrate down",
-    "postinstall": "npm run db:migrate"
+    "lint:js": "webpack --config webpack.config.js"
   },
   "lint-staged": {
     "**/*": "prettier --write --ignore-unknown",
-    "frontend/**/*.js": "webpack"
+    "frontend/**/*.js": "npm run lint:js"
   },
   "author": "",
   "license": "ISC",
