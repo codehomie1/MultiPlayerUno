@@ -1,5 +1,7 @@
 require("dotenv").config();
 const path = require("path");
+const http = require("http");
+const socketIO = require("socket.io");
 const createError = require("http-errors");
 const morgan = require("morgan");
 const cookieParser = require("cookie-parser");
@@ -16,7 +18,19 @@ const {
 
 const express = require("express");
 const app = express();
+const server = http.createServer(app);
+const io = socketIO(server);
 
+io.on('connection', (socket) => {
+  socket.on('chatMessage', (message) => {
+    io.emit('chatMessage', message);
+  });
+});
+
+app.get('/socket.io/socket.io.js', (req, res) => {
+  const socketIOPath = require.resolve('socket.io-client/dist/socket.io.js');
+  res.sendFile(socketIOPath);
+});
 app.use(morgan("dev"));
 app.use(express.json());
 app.use(bodyParser.json());

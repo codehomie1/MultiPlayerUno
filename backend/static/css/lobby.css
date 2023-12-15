@@ -1,0 +1,64 @@
+.lobby-form-group {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  
+  .submitButton {
+    flex: 1;
+    margin: 0 10px;
+  }
+
+/* Add these styles to your lobby.css file */
+
+/* Games List */
+.game-list {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-top: 20px;
+    max-height: 300px; /* Adjust the maximum height as needed */
+    overflow-y: auto; /* Add scrollbars if the content overflows */
+  }
+  
+  /* Game Form Container */
+  .game-form-container {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #f5f5f5;
+    border: 1px solid #ccc;
+  }
+  
+  /* Game Form Rows */
+  .game-form-row {
+    margin-bottom: 10px;
+  }
+  
+  /* Game Form Labels */
+  .game-form label {
+    font-weight: bold;
+  }
+  
+  /* Game Form Input Fields */
+  .game-form input.msg-input {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+  }
+  
+  /* Submit Button */
+  .submit-game-form-btn {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .submit-game-form-btn:hover {
+    background-color: #0056b3;
+  }
+  

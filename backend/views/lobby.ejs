@@ -5,20 +5,59 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="/css/home.css">
+    <link rel="stylesheet" href="/css/lobby.css">
     <script src="/js/main.js" defer></script>
+    <script src="js/lobby.js" defer></script>
+    <script src="/socket.io/socket.io.js"></script>
 </head>
 <body>
     <my-header></my-header>
 
-    <div class="container-center">
+     <div class="container-center">
         <h1 class="header-pages">
             Welcome to the Lobby <br>id: <%= user.id %><br>username:  <%= user.username %>
         </h1>
-        
-        <div class="form-group">
-            <button id="findGameButton" class="submitButton">Find Game</button>
+        <h1>Games List</h1>
+            <div class="game-list" id="games-list-id">
+                <h3>This is where the games will get listed</h3>
+            </div>
+            <!--
+            <div class="game-form-container">
+            <form id="create-game-form-id" class="game-form" onsubmit="createGame(); return false;">
+                <div class="game-form-row">
+                <label for="gametitle">Game Title</label>
+                <input class="msg-input" name="gametitle" placeholder="Game Title" required>
+                </div>
+                <div class="game-form-row">
+                <label for="count">Number of Players</label>
+                <input class="msg-input" name="count" type="number" placeholder="Number of Players" required>
+                </div>
+                <input class="submit-game-form-btn" type="submit" value="Create">
+            </form>
+            </div>
+
+        <div class="lobby-form-group">
+            <button id="findGameButton" class="submitButton">Find a Game</button>
+            <button id="CreateGameButton" class="submitButton">Create a Game</button>
         </div>
-    </div>
+    </div> -->
+
+    <div class="list-container">
+        <div class="chat-list-container">
+          <h1>Chat</h1>
+          <div class="chat-list" id="chat-list-id">
+            
+          </div>
+        </div>
+        <div class="chat-form-container">
+          <form id="send-chat-form-id" class="msg-form" onsubmit="sendMessage(); return false;">
+            <label for="message">Message</label>
+            <input type="text" class="msg-input" name="message" required>
+            <input type="submit" class="msg-btn" value="Send">
+          </form>
+        </div>
+      </div>
+      
 
     <my-footer></my-footer>
 

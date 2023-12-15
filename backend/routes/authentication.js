@@ -111,9 +111,13 @@ router.get("/logout", (req, res) => {
 
 router.get("/status", (req, res) => {
   if (req.session && req.session.user) {
-    res.json({ isAuthenticated: true, user: req.session.user });
+    res.send({ user: req.session.user });
+    // res.json({ isAuthenticated: true, user: req.session.user });
   } else {
     res.json({ isAuthenticated: false });
+    console.log("This shit aint getting authenticated");
   }
 });
+
+
 module.exports = router;
