@@ -31,24 +31,23 @@
         <div class="uno-interface">
             <!-- Gameplay Screen -->
             <div class='pile-container'>
-                <!-- Deck Container -->
-                <div class="deck-container">
-                    <div class="pile-name">
-                        <h3>Deck</h3>
-                    </div>
-                    <div class='deck'>
-                        <img id="deck-img-id" src='/cards/back.png' alt='Deck' height="135px" width="100px">
-                    </div>
+            <!-- Deck Container -->
+            <div class="deck-container">
+                <div class="pile-name">
+                    <h3>Deck</h3>
                 </div>
+                <div class='deck'>
+                    <img id="deck-img-id" src='/cards/back.png' alt='Deck' height="135px" width="100px">
+                </div>
+            </div>
 
-                <!-- Discard Container -->
-                <div class="discard-container">
-                    <div class="pile-name">
-                        <h3>Discard Pile</h3>
-                    </div>
-                    <div class='discard-pile'>
-                        <img id="discard-img-id" src='/cards/back.png' alt='Discard Pile' height="135px" width="100px">
-                    </div>
+            <!-- Discard Container -->
+            <div class="discard-container">
+                <div class="pile-name">
+                    <h3>Discard Pile</h3>
+                </div>
+                <div class='discard-pile'>
+                    <img id="discard-img-id" src='/cards/back.png' alt='Discard Pile' height="135px" width="100px">
                 </div>
             </div>
 
@@ -61,6 +60,7 @@
                     <img id="discard-img-id" src='/cards/back.png' alt='Discard Pile' height="135px" width="100px">
                 </div>
             </div>
+        </div>
             
             <div class="draw-btn-loc">
                 <input class="draw-btn" type='button' value='Draw' onclick="drawCard()">
@@ -115,15 +115,15 @@
         </div>
         <div class="chat-messages" id="chatMessages">
             <!-- Example of a user message -->
-            <div class="chat-message user">This is a user's message</div>
+            <!-- <div class="chat-message user">This is a user's message</div> -->
 
             <!-- Example of another user's message -->
-            <div class="chat-message other">This is someone else's message</div>
+            <!-- <div class="chat-message other">This is someone else's message</div> -->
 
         </div>
-        <form class="chat-form" id="chatForm">
-            <input type="text" id="chatInput" placeholder="Type a message..." autocomplete="off">
-            <button type="submit">Send</button>
+        <form class="chat-form" id="send-chat-form-id" onsubmit="sendMessage(); return false;">
+            <input name="message" type="text" id="chatInput" placeholder="Type a message..." autocomplete="off">
+            <input type="submit" class="msg-btn" value="Send">
         </form>
     </div>
 

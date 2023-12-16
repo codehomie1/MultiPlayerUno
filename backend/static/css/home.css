@@ -120,6 +120,7 @@ my-footer {
 }
 
 .container-center {
+  margin-bottom: 0;
   width: 80%;
   margin-left: auto;
   margin-right: auto;
@@ -349,14 +350,24 @@ button:hover {
 }
 
 /* Adjust the chat box size and layout on smaller screens */
-@media (max-width: 900px) {
+@media (max-width: 1200px) {
   .chat-box {
     position: fixed;
-    bottom: 60px;
-    width: 100%;
-    height: 300px;
-    right: 0;
-    left: 0;
+    width: 350px;
+    height: 300px; /* Set the height of the chat box */
+    z-index: 5;
+    overflow-y: auto;
+  }
+
+  /* Add extra space at the bottom of the main container */
+  .container-center {
+    margin-bottom: 350px; /* Same as the height of the chat box */
+  }
+
+  /* Adjust the layout of game elements if needed */
+  .uno-interface,
+  .game-container {
+    /* Additional responsive adjustments */
   }
 }
 
@@ -448,7 +459,22 @@ button:hover {
   transition: background-color 0.3s;
 }
 
-draw-btn:hover {
+.draw-btn:hover {
+  background-color: #333;
+}
+
+.msg-btn {
+  padding: 10px 15px;
+  font-size: 16px;
+  background-color: #444;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.msg-btn:hover {
   background-color: #333;
 }
 
