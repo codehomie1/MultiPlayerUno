@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game</title>
+    <link rel="stylesheet" href="/css/home.css">
+    <script src="/js/main.js" defer></script>
+
+
+</head>
+<body>
+    <my-header></my-header>
+
+    <div class="container-center">
+        <h1 class="header-pages">
+            Welcome to Waiting Room <%= user.username %>
+        </h1>
+        <h2 class="header-pages">Lobby Name !!!DO SOMETHING HERE!!! </h2>
+        <h3>
+            <%= user.username %> has joined <br>
+            <%= user.username %> has joined <br>
+            <%= user.username %> has joined <br>
+        </h3>
+
+        <div class="form-group">
+            <button id="findGameButton" class="submitButton">Start Game</button>
+        </div>
+    </div>
+
+
+
+    <div class="chat-box">
+        <div class="chat-header">
+            <h2>Chat</h2>
+        </div>
+        <div class="chat-messages" id="chatMessages">
+            <!-- Example of a user message -->
+            <div class="chat-message user">This is a user's message</div>
+
+            <!-- Example of another user's message -->
+            <div class="chat-message other">This is someone else's message</div>
+
+        </div>
+        <form class="chat-form" id="chatForm">
+            <input type="text" id="chatInput" placeholder="Type a message..." autocomplete="off">
+            <button type="submit">Send</button>
+        </form>
+    </div>
+
+    <script>
+        function appendMessage(username, message) {
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('chat-message');
+            messageDiv.classList.add(username === 'user.username' ? 'user' : 'other'); // Double Check
+            messageDiv.textContent = message;
+            document.getElementById('chatMessages').appendChild(messageDiv);
+        }
+    </script>
+    <my-footer></my-footer>
+
+</body>
+</html>

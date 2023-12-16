@@ -323,23 +323,19 @@ button:hover {
 }
 
 .chat-message {
-  background-color: #f4f4f4; /* Light grey background */
+  background-color: #f4f4f4;
   margin: 5px;
   padding: 8px 10px;
   border-radius: 10px;
   box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
   max-width: 80%;
-  word-wrap: break-word; /* Ensure long words do not overflow */
+  word-wrap: break-word;
 }
 
 /* Differentiate between messages sent by the user and others */
 .chat-message.user {
-  background-color: #d4edda; /* Light green background for user's messages */
-  margin-left: auto; /* Align user messages to the right */
-}
-
-.chat-message.other {
-  /* Style for other users' messages, if needed */
+  background-color: #d4edda;
+  margin-left: auto;
 }
 
 /* Scrollbar styles for chat messages */
@@ -353,7 +349,7 @@ button:hover {
 }
 
 /* Adjust the chat box size and layout on smaller screens */
-@media (max-width: 600px) {
+@media (max-width: 900px) {
   .chat-box {
     position: fixed;
     bottom: 60px;
@@ -362,4 +358,96 @@ button:hover {
     right: 0;
     left: 0;
   }
+}
+
+/* Uno Game Styles */
+
+/* Container for the deck and discard pile */
+.pile-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 20px;
+}
+
+/* Individual containers for the deck and discard pile */
+.deck-container,
+.discard-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Button styles for drawing a card and other actions */
+.draw-btn,
+.quit-btn,
+.start-btn {
+  margin: 10px;
+  padding: 5px 15px;
+  background-color: #444;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.draw-btn:hover,
+.quit-btn:hover,
+.start-btn:hover {
+  background-color: #555;
+}
+
+/* Add some space around the images */
+.deck img,
+.discard-pile img {
+  margin: 10px;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Ensure that the chat box does not cover the game */
+.chat-box {
+  z-index: 3; /* higher than the game elements */
+}
+
+/* Additional media query adjustments for better responsive design */
+@media (max-width: 768px) {
+  .pile-container {
+    flex-direction: column;
+  }
+
+  .deck-container,
+  .discard-container {
+    margin-bottom: 20px;
+  }
+}
+
+.quit-btn {
+  padding: 10px 20px;
+  font-size: 24px;
+  background-color: #444;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+/* Change background color of button on hover */
+.quit-btn:hover {
+  background-color: #333;
+}
+
+.draw-btn {
+  padding: 10px 20px;
+  font-size: 24px;
+  background-color: #444;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+draw-btn:hover {
+  background-color: #333;
 }

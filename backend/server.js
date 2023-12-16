@@ -21,14 +21,14 @@ const app = express();
 const server = http.createServer(app);
 const io = socketIO(server);
 
-io.on('connection', (socket) => {
-  socket.on('chatMessage', (message) => {
-    io.emit('chatMessage', message);
+io.on("connection", (socket) => {
+  socket.on("chatMessage", (message) => {
+    io.emit("chatMessage", message);
   });
 });
 
-app.get('/socket.io/socket.io.js', (req, res) => {
-  const socketIOPath = require.resolve('socket.io-client/dist/socket.io.js');
+app.get("/socket.io/socket.io.js", (req, res) => {
+  const socketIOPath = require.resolve("socket.io-client/dist/socket.io.js");
   res.sendFile(socketIOPath);
 });
 app.use(morgan("dev"));
@@ -95,6 +95,7 @@ const Routes = require("./routes");
 
 app.use(["/landing", "/"], Routes.landing);
 app.use("/auth", Routes.authentication);
+app.use("/waitingroom", isAuthenticated, Routes.waitingroom);
 app.use("/lobby", isAuthenticated, Routes.lobby);
 app.use("/games", isAuthenticated, Routes.game);
 
