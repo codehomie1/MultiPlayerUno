@@ -148,6 +148,10 @@ function redirectToLobby() {
 }
 
 async function checkLogin() {
+  document.querySelector(".error-message").innerHTML = "";
+  let msgElement = document.querySelector(".message");
+  msgElement.innerHTML = "<p>Loading...</p>";
+
   try {
     const response = await fetch("/auth/status");
     const data = await response.json();
@@ -155,9 +159,14 @@ async function checkLogin() {
     const isAuth = data.isAuthenticated;
     if (!isAuth) {
       let errorElement = document.querySelector(".error-message");
+      msgElement.innerHTML = "";
       let errorMessageElement = document.createElement("p");
       errorMessageElement.textContent = "Sign in failed. Please try again.";
       errorElement.appendChild(errorMessageElement);
+
+      setTimeout(() => {
+        errorElement.innerHTML = "";
+      }, 3000);
     }
   } catch (error) {
     console.error("Error fetching authentication status:", error);

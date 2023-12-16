@@ -244,6 +244,12 @@ button:hover {
   display: block;
 }
 
+.message {
+  font-size: 0.8rem;
+  height: 1rem;
+  display: block;
+}
+
 /* Style for the registration prompt */
 .register-prompt {
   text-align: center;
