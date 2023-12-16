@@ -72,6 +72,22 @@ exports.up = pgm => {
       },
     });
 
+    pgm.createTable("user_cards", {
+      // From the docs, "id" is equivalent to: { type: 'serial', primaryKey: true }
+      game_id: {
+        type: "int",
+        notNull: true,
+      },
+      user_id: {
+        type: "int",
+        notNull: true,
+      },
+      card_id: {
+        type: "int",
+        notNull: true,
+      },
+    });
+
     pgm.createTable("uno_cards", {
       card_id: "id",
 
@@ -92,4 +108,5 @@ exports.down = pgm => {
     pgm.dropTable("users");
     pgm.dropTable("games");
     pgm.dropTable("uno_cards");
+    pgm.dropTable("user_cards");
 };
