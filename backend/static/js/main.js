@@ -143,6 +143,27 @@ class MyFooter extends HTMLElement {
   }
 }
 
+function redirectToLobby() {
+  window.location.href = "/lobby";
+}
+
+async function checkLogin() {
+  try {
+    const response = await fetch("/auth/status");
+    const data = await response.json();
+
+    const isAuth = data.isAuthenticated;
+    if (!isAuth) {
+      let errorElement = document.querySelector(".error-message");
+      let errorMessageElement = document.createElement("p");
+      errorMessageElement.textContent = "Sign in failed. Please try again.";
+      errorElement.appendChild(errorMessageElement);
+    }
+  } catch (error) {
+    console.error("Error fetching authentication status:", error);
+  }
+}
+
 customElements.define("my-footer", MyFooter);
 
 document.addEventListener("DOMContentLoaded", () => {
