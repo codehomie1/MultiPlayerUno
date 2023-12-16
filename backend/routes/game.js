@@ -101,7 +101,7 @@ router.post("/create", async (req, res) => {
     top_deck,
     top_discard,
     0,
-    users_required
+    users_required,
   );
 
   io.emit(CREATE_GAME, { gametitle, count, user_id, game_id, ongoing: false });
@@ -157,22 +157,6 @@ router.post("/:game_id/start", async (req, res) => {
   const { game_id, user_id } = req.body;
 
   try {
-  //   const io = req.app.get("io");
-
-  //   const numPlayers = io.sockets.adapter.rooms.get(game_id).size;
-
-  //   // let users_required = await Games.getNumberOfPlayers(game_id);
-  //   // users_required = users_required?.users_required || 2;
-
-  //   if (numPlayers < users_required) {
-  //     res.send({
-  //       url: `/lobby`,
-  //       message: `Need at least ${users_required} players`,
-  //       status: 400,
-  //     });
-  //     return;
-    // }
-
     let isPlayerExist = await Games.isPlayerExist(user_id, game_id);
     isPlayerExist = isPlayerExist?.user_id || null;
     const currentPlayerName = await getCurrentPlayerName(game_id);
@@ -279,29 +263,17 @@ router.post("/:game_id/start", async (req, res) => {
 });
 
 router.put("/:game_id/play", async (req, res) => {
-  // make sure user is in the game
-  // make sure player turn
-  // make sure player can play the card
-  // handle special hards
-
-  //user_id = user who played the card
-  //game_id = game where the card was played in
-  //card_id = id of the discard card that needs to be matched with
-  const { game_id, user_id, card_id } = req.body; //extract from the request body
+  const { game_id, user_id, card_id } = req.body;
   const io = req.app.get("io");
 
-  //empty arrays for player Info
   let playerInfo = [];
 
-  //loop through players, if uid matches then assign playerInfo
   for (let i = 0; i < players.length; i++) {
     if (user_id === players[i].user_id) {
       playerInfo = players[i];
       break;
     }
   }
-
-  //Add your UNO rules condition here
   const followsUNORules = checkUNORules(card_id, playerInfo.hand);
 
   if (!followsUNORules) {
@@ -346,7 +318,6 @@ router.put("/:game_id/play", async (req, res) => {
     }
   }
   if (playedNumber === 12) {
-    //reverse not implemented yet
     const draw2UserId = await drawTwoCards(game_id);
     draw2CardsUserId = draw2UserId;
   }
@@ -366,14 +337,14 @@ router.put("/:game_id/play", async (req, res) => {
     game_id,
     user_id,
     playedCardIDs,
-    playedCardIDs.length
+    playedCardIDs.length,
   );
 
   await Games.saveGameState(
     game_id,
     top_deck.split(".")[0],
     top_discard.split(".")[0],
-    position
+    position,
   );
 
   const currentPlayerName = await getCurrentPlayerName(game_id);
@@ -394,27 +365,22 @@ router.put("/:game_id/play", async (req, res) => {
   });
 
   if (playedNumber === 10 || playedNumber === 11 || playedNumber === 12) {
-    //do nothing, since we already skipped the next player
   } else if (isInReverse) {
     await reverseGameOrder(game_id);
   } else {
     await updatePosition(game_id);
   }
-
 });
 
 const checkUNORules = (card_id, playerHand) => {
-  // Get the color and number of the played card
   const playedColor = parseInt(card_id.split("-")[0]);
   const playedNumber = parseInt(card_id.split("-")[1]);
 
-  // Get the top discard's color and number
   const topDiscardColor = parseInt(top_discard.split("-")[0]);
   const topDiscardNumber = parseInt(top_discard.split("-")[1]);
 
   console.log("Player Hand before matching: " + playerHand);
 
-  // Check if the played color OR number matched the discard
   if (playedColor === topDiscardColor || playedNumber === topDiscardNumber) {
     console.log("When Card matches 1: " + playerHand);
     return true;
@@ -423,16 +389,6 @@ const checkUNORules = (card_id, playerHand) => {
     console.log("Special card");
     return true;
   }
-
-  // for (let card of playerHand) {
-  //   const cardColor = parseInt(card.split("-")[0]);
-  //   const cardNumber = parseInt(card.split("-")[1]);
-
-  //   if (cardColor === topDiscardColor || cardNumber === topDiscardNumber) {
-  //     console.log("When Card matches 2: " + playerHand);
-  //     return true;
-  //   }
-  // }
   return false;
 };
 
@@ -496,11 +452,9 @@ const skipNextPlayerReverse = async (game_id) => {
 const drawTwoCards = async (game_id) => {
   let randomCard1 = getRandomCard();
   let randomCard2 = getRandomCard();
-  //you might need these for the front end?? idk
   let card1 = `${randomCard1[0]}-${randomCard1[1]}.png`;
   let card2 = `${randomCard2[0]}-${randomCard2[1]}.png`;
 
-  //get position of player that is drawing the cards
   let maxPlayers = players.length;
   if (position === maxPlayers - 1) {
     position = 0;
@@ -512,7 +466,6 @@ const drawTwoCards = async (game_id) => {
   const user_id = await Games.getUserID(game_id, position);
   await drawACard(card1, game_id, user_id);
   await drawACard(card2, game_id, user_id);
-  //now skip that player's turn
   if (position === maxPlayers - 1) {
     position = 0;
   } else {
@@ -529,7 +482,6 @@ const drawACard = async (card, game_id, user_id) => {
   let card_id = await user_cards.findCardID(cardID_arr[0], cardID_arr[1]);
   await user_cards.drawCard(game_id, user_id, card_id);
 };
-//leave space here for now
 
 router.put("/:game_id/draw", async (req, res) => {
   const { game_id, user_id } = req.body;
@@ -550,7 +502,6 @@ router.put("/:game_id/draw", async (req, res) => {
     }
   }
 
-  // penalty did not call uno
   if (playerInfo.hand?.length === 1) {
     for (let i = 0; i < 2; i++) {
       playerInfo.hand?.push(top_deck);
@@ -574,7 +525,7 @@ router.put("/:game_id/draw", async (req, res) => {
       game_id,
       top_deck.split(".")[0],
       top_discard.split(".")[0],
-      position
+      position,
     );
 
     const currentPlayerName = await getCurrentPlayerName(game_id);
@@ -610,7 +561,6 @@ router.put("/:game_id/draw", async (req, res) => {
   playerInfo.hand?.push(card);
   playerInfoNewCards.hand?.push(card);
   cardsSet.add(top_deck);
-  //find card ID before sending to db
   await drawACard(card, game_id, user_id);
 
   const top_deck_arr = getRandomCard();
@@ -632,7 +582,7 @@ router.put("/:game_id/draw", async (req, res) => {
     game_id,
     top_deck.split(".")[0],
     top_discard.split(".")[0],
-    position
+    position,
   );
 
   const currentPlayerName = await getCurrentPlayerName(game_id);
@@ -655,7 +605,6 @@ router.put("/:game_id/draw", async (req, res) => {
   });
 });
 
-//Call Uno Function
 router.put("/:game_id/uno", async (req, res) => {
   const { game_id } = req.params;
   const userSession = req.session.user;
@@ -691,44 +640,6 @@ router.put("/:game_id/uno", async (req, res) => {
   res.send({ message: "Cannot call uno", status: 400 });
 });
 
-//Send Message
-// Game.sendMessage = async (req, res) => {
-//   const { message, user_id, username, game_id } = req.body;
-//   const io = req.app.get("io");
-
-//   if (!user_id || !username) {
-//     res.send({ message: "Bad Request", status: 400 });
-//     return;
-//   }
-
-//   if (!message || message.trim().length === 0) {
-//     res.send({ message: "Please type a message", status: 400 });
-//     return;
-//   }
-
-//   try {
-//     const room_id = game_id;
-//     await GAMECHAT.create(username, message, room_id);
-//     io.in(game_id).emit(CHAT, { message, username });
-//     res.send({ message: message, username: username, status: 200 });
-//   } catch (err) {
-//     res.send({ message: "Error sending message", status: 500 });
-//   }
-// };
-
-// // Get all Messages
-// Game.getAllMessages = async (req, res) => {
-//   const { game_id } = req.params;
-
-//   try {
-//     const messageArray = await GAMECHAT.get(game_id);
-//     res.send({ messageArray: messageArray, status: 200 });
-//   } catch (err) {
-//     res.send({ message: "Error getting all messages", status: 500 });
-//   }
-// };
-
-// Save Game state
 router.put("/:game_id/state", async (req, res) => {
   const { game_id } = req.params;
 
@@ -737,7 +648,7 @@ router.put("/:game_id/state", async (req, res) => {
       game_id,
       top_deck.split(".")[0],
       top_discard.split(".")[0],
-      position
+      position,
     );
     res.send({ message: "Game session saved", status: 200 });
   } catch (err) {
@@ -748,13 +659,13 @@ router.put("/:game_id/state", async (req, res) => {
 
 router.get("/:id", (req, res) => {
   const { id } = req.params;
-  const uId = req.session.user ? req.session.user.id: "";
+  const uId = req.session.user ? req.session.user.id : "";
 
-  res.render("game", { 
+  res.render("game", {
     id,
     user_id: uId,
     title: "",
-   });
+  });
 });
 
 module.exports = router;

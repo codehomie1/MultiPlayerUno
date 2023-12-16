@@ -1,6 +1,5 @@
 class MyHeader extends HTMLElement {
   connectedCallback() {
-    // Set initial structure for the header, including a dedicated container for the nav bar content
     this.innerHTML = `
       <button id="sidebarToggle" class="openbtn">&#9776;</button>
       <div id="mySidebar" class="sidebar">
@@ -21,7 +20,6 @@ class MyHeader extends HTMLElement {
   }
 
   addEventListeners() {
-    // Event listeners for the sidebar
     const sidebar = this.querySelector("#mySidebar");
     const sidebarToggle = this.querySelector("#sidebarToggle");
 
@@ -42,8 +40,6 @@ class MyHeader extends HTMLElement {
 
   fetchNavBar() {
     const userIsSignedIn = this.isUserSignedIn();
-
-    // Define the navbar content with conditional rendering
     const navBarContent = `
       <h2> UNO Game </h2>
       <ul>
@@ -72,7 +68,6 @@ class MyHeader extends HTMLElement {
     }
   }
 
-  // This method updates the sidebar's HTML content
   setSidebarContent(navContent) {
     const sidebarElement = this.querySelector("#mySidebar");
     sidebarElement.innerHTML = `
@@ -80,7 +75,7 @@ class MyHeader extends HTMLElement {
         ${navContent}
       `;
     sidebarElement.querySelector(".closebtn").addEventListener("click", () => {
-      this.closeNav(); // Call the closeNav method when the close button is clicked
+      this.closeNav();
     });
   }
 
@@ -89,7 +84,6 @@ class MyHeader extends HTMLElement {
     sidebar.style.width = "0";
   }
 
-  // This method adds a click event listener to the sidebar toggle button
   addEventListeners() {
     const toggleButton = this.querySelector("#sidebarToggle");
     toggleButton.addEventListener("click", () => {
@@ -114,13 +108,11 @@ class MyHeader extends HTMLElement {
   }
 
   logoutUser() {
-    // Make a request to the server's logout endpoint
     fetch("/auth/logout", { method: "GET" })
       .then((response) => {
         if (response.ok) {
-          // Successfully logged out, update the state and possibly redirect
           this.setUserSignedIn(false);
-          window.location.href = "/landing"; // Redirect to a landing page or login page
+          window.location.href = "/landing";
         } else {
           console.error("Logout failed");
         }

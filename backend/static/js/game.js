@@ -214,7 +214,6 @@ const getAllMessages = async () => {
   }
 };
 
-// PLAY CARD
 const playCard = async (cardName) => {
   const formDataJson = {};
 
@@ -252,8 +251,6 @@ const playCard = async (cardName) => {
     console.log(err);
   }
 };
-
-//end of PLAY CARD
 
 const drawCard = async () => {
   const formDataJson = {};
@@ -361,7 +358,6 @@ const saveGameState = async () => {
 };
 
 const endGame = () => {
-  //TODO implement
   console.log("game ended");
 };
 

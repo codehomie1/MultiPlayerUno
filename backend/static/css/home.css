@@ -107,7 +107,6 @@ my-footer {
   width: 15rem;
 }
 
-/* Change background color of button on hover */
 .submitButton:hover {
   background-color: #333;
 }
@@ -168,7 +167,6 @@ button:hover {
 }
 
 /* Login and Register */
-/* Highlight the bottom border of the input when it is focused */
 .form-group {
   position: relative;
   margin-top: 15px;
@@ -239,12 +237,6 @@ button:hover {
 
 .error-message {
   color: red;
-  font-size: 0.8rem;
-  height: 1rem;
-  display: block;
-}
-
-.message {
   font-size: 0.8rem;
   height: 1rem;
   display: block;
@@ -360,26 +352,18 @@ button:hover {
   .chat-box {
     position: fixed;
     width: 350px;
-    height: 300px; /* Set the height of the chat box */
+    height: 300px;
     z-index: 5;
     overflow-y: auto;
   }
 
   /* Add extra space at the bottom of the main container */
   .container-center {
-    margin-bottom: 350px; /* Same as the height of the chat box */
-  }
-
-  /* Adjust the layout of game elements if needed */
-  .uno-interface,
-  .game-container {
-    /* Additional responsive adjustments */
+    margin-bottom: 350px;
   }
 }
 
 /* Uno Game Styles */
-
-/* Container for the deck and discard pile */
 .pile-container {
   display: flex;
   justify-content: space-around;
@@ -421,9 +405,8 @@ button:hover {
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
 }
 
-/* Ensure that the chat box does not cover the game */
 .chat-box {
-  z-index: 3; /* higher than the game elements */
+  z-index: 3;
 }
 
 /* Additional media query adjustments for better responsive design */
@@ -488,12 +471,6 @@ button:hover {
 .hands-container {
   justify-content: space-around;
   align-items: center;
-}
-
-.player-hand,
-.opponents-hand {
-  /* Add any specific styling for player and opponents hand here */
-  /* For example, you might want to set a max-width or padding */
 }
 
 .hands-title {

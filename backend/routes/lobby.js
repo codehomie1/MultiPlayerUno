@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const lobbyChat = require("../db/chat_public");
-// const socket = io();
 const games = require("../db/games.js");
 
 const getRandomCard = () => {
@@ -30,17 +29,16 @@ router.post("/send-message", async (req, res) => {
   const io = req.app.get("io");
 
   if (!user_id || !username) {
-    res.send({ message: "Please type a message", status:400 });
+    res.send({ message: "Please type a message", status: 400 });
     return;
   }
 
   try {
     await lobbyChat.createMessage(username, message);
-    // io.in(game_id).emit("chat", {message, username});
     res.send({ message: message, username: username, status: 200 });
   } catch (err) {
     console.log(err);
-    res.send({ message: "Error sending message", status:500 });
+    res.send({ message: "Error sending message", status: 500 });
     return;
   }
 });
@@ -62,19 +60,19 @@ router.post("/create-game", async (req, res) => {
   console.log("----------Game body----------");
   console.log(req.body);
   console.log("----------Game body----------");
-  if(!user_id) {
-    res.send({ message: "Bad Request", status:400 });
+  if (!user_id) {
+    res.send({ message: "Bad Request", status: 400 });
     return;
   }
 
   if (!gametitle || gametitle.trim().length === 0) {
-    res.send({ message: "Cannot leave blank!", status:400 });
-    return ;
+    res.send({ message: "Cannot leave blank!", status: 400 });
+    return;
   }
   const title = gametitle;
 
   let top_deck = getRandomCard();
-  top_deck = `${top_deck[0]}-${top_deck[1]}`
+  top_deck = `${top_deck[0]}-${top_deck[1]}`;
   let top_discard_arr = getRandomCard();
   top_discard = `${top_discard_arr[0]}-${top_discard_arr[1]}`;
 
@@ -98,7 +96,6 @@ router.post("/create-game", async (req, res) => {
     0,
   );
 
-  // io.emit(CREATE_GAME, { gametitle, user_id, game_id, ongoing: false });
   res.send({
     game_id: game_id,
     gametitle: gametitle,

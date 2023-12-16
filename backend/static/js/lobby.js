@@ -9,7 +9,7 @@ const showMessage = (data) => {
     document.getElementById("msg-id").innerText = "";
   }, 10000);
 };
-//GOOD JOB
+
 const getUserSession = async () => {
   try {
     const res = await fetch("/auth/status");
@@ -63,8 +63,6 @@ const getAllMessages = async () => {
       messageP.classList.add("chat-message");
       messageP.classList.add("user");
       li.appendChild(usernameSpan);
-      // li.appendChild(createdAtSpan);
-      // li.appendChild(document.createTextNode(": "));
       li.appendChild(messageP);
 
       chatList.appendChild(li);
@@ -86,8 +84,6 @@ const sendMessage = async () => {
   const userSession = await getUserSession();
   formDataJson["user_id"] = userSession.id;
   formDataJson["username"] = userSession.username;
-  // const game_id = getGameId(document.location.pathname);
-  // formDataJson["game_id"] = game_id;
 
   const options = {
     method: "POST",
@@ -96,9 +92,6 @@ const sendMessage = async () => {
     },
     body: JSON.stringify(formDataJson),
   };
-
-  // console.log("---------messageInfo---------");
-  // console.log(options.body);
 
   try {
     const res = await fetch("/lobby/send-message", options);
@@ -168,7 +161,6 @@ const getGames = async () => {
 
     messageArray.map((msg) => {
       let li = document.createElement("div");
-      //   li.className = "game";
       li.innerHTML = `<a class="game-room-link" href="/waitingroom/${msg.id}">Title: ${msg.game_title}, # ${msg.id}, Started: ${msg.ongoing}</a>`;
       gameList.appendChild(li);
     });

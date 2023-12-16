@@ -1,8 +1,5 @@
-
-
 const doAthing = (param) => {
-    console.log(`Logging ${param} from other`);    
-}
+  console.log(`Logging ${param} from other`);
+};
 
-// module.exports = { doAThing }
-export { doAthing } 
+export { doAthing };
