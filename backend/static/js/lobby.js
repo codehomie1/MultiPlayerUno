@@ -21,59 +21,6 @@ const getUserSession = async () => {
 };
 
 const getAllMessages = async () => {
-  try {
-    const res = await fetch("/lobby/get-messages", { method: "GET" });
-    const data = await res.json();
-    const messageArray = data.messageArray;
-
-    if (data.status === 400 || data.status === 500) {
-      return;
-    }
-
-    let chatList = document.getElementById("chat-list-id");
-
-    if (!chatList) {
-      return;
-    }
-
-    chatList.innerHTML = "";
-
-    messageArray.map((msg) => {
-      const date = new Date(msg.created_at);
-
-      const createdAtFormatted = date.toLocaleString("en-US", {
-        month: "long",
-        day: "numeric",
-        year: "numeric",
-        hour: "numeric",
-        minute: "numeric",
-      });
-
-      let li = document.createElement("div");
-      li.className = "message";
-
-      let usernameSpan = document.createElement("span");
-      usernameSpan.style.fontWeight = "bold";
-      usernameSpan.textContent = msg.username;
-
-      let createdAtSpan = document.createElement("span");
-      createdAtSpan.style.marginLeft = "5px";
-      createdAtSpan.textContent = createdAtFormatted;
-
-      let messageP = document.createElement("p");
-      messageP.style.margin = "5px";
-      messageP.textContent = msg.message;
-
-      li.appendChild(usernameSpan);
-      li.appendChild(createdAtSpan);
-      li.appendChild(document.createTextNode(": "));
-      li.appendChild(messageP);
-
-      chatList.appendChild(li);
-    });
-  } catch (err) {
-    console.log(err);
-  }
     try {
       const res = await fetch("/lobby/get-messages", { method: "GET" });
       const data = await res.json();
@@ -108,10 +55,6 @@ const getAllMessages = async () => {
         let usernameSpan = document.createElement("span");
         usernameSpan.style.fontWeight = "bold";
         usernameSpan.textContent = msg.username;
-  
-        let createdAtSpan = document.createElement("span");
-        createdAtSpan.style.marginLeft = "5px";
-        createdAtSpan.textContent = createdAtFormatted;
   
         let messageP = document.createElement("p");
         messageP.style.margin = "5px";
@@ -161,6 +104,7 @@ const sendMessage = async () => {
   try {
     const res = await fetch("/lobby/send-message", options);
     const data = await res.json();
+    getAllMessages();
 
         if (data.status === 400 || data.status === 500) {
             showMessage(data);
