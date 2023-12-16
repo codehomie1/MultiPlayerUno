@@ -1,19 +1,17 @@
-// const db = require("./connections.js");
+const db = require('./db');
 
-// const create = async (username, message, room_id) => {
-//   return await db.one(
-//     "INSERT INTO game_room_messages (username, message, room_id) VALUES ($1, $2, $3) RETURNING created_at",
-//     [username, message, room_id]
-//   );
-// };
+const createMessage = async (username, message) => {
+  return await db.one(
+    'INSERT INTO inGame_Chat (username, message) VALUES ($1, $2)',
+    [username, message]
+  );
+};
 
-// const get = async (game_id) => {
-//   return await db.many("SELECT * FROM game_room_messages WHERE room_id = $1", [
-//     game_id,
-//   ]);
-// };
+const getMessages = async () => {
+  return await db.any('SELECT * FROM inGame_Chat');
+};
 
-// module.exports = {
-//   create,
-//   get,
-// };
+module.exports = {
+  createMessage,
+  getMessages,
+};

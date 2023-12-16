@@ -43,6 +43,23 @@ exports.up = pgm => {
       },
     });
 
+    pgm.createTable("inGame_Chat", {
+      id: "id",
+      username: {
+        type: "text",
+        notNull: true,
+      },
+      message: {
+        type: "text",
+        notNull: true,
+      },
+      created_at: {
+        type: "timestamp",
+        notNull: true,
+        default: pgm.func("current_timestamp"),
+      },
+    });
+
     pgm.createTable("games", {
       id: "id",
       game_title: {
@@ -92,4 +109,5 @@ exports.down = pgm => {
     pgm.dropTable("users");
     pgm.dropTable("games");
     pgm.dropTable("uno_cards");
+    pgm.dropTable("inGame_Chat");
 };

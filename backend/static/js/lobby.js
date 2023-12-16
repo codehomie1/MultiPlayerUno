@@ -177,3 +177,6 @@ const createGame = async () => {
         console.log(err);
       }
     };
+
+getAllMessages();
+getGames();
