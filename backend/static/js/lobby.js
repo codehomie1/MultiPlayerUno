@@ -169,7 +169,7 @@ const getGames = async () => {
     messageArray.map((msg) => {
       let li = document.createElement("div");
       //   li.className = "game";
-      li.innerHTML = `<a class="game-room-link" href="/waitingroom">Title: ${msg.game_title}, # ${msg.id}, Players: ${msg.users_required}, Started: ${msg.ongoing}</a>`;
+      li.innerHTML = `<a class="game-room-link" href="/waitingroom/${msg.id}">Title: ${msg.game_title}, # ${msg.id}, Started: ${msg.ongoing}</a>`;
       gameList.appendChild(li);
     });
   } catch (err) {

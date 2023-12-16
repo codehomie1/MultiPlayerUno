@@ -10,7 +10,7 @@ const showMessage = (data) => {
     }, 5000);
   };
   
-  const getGameId = (location) => {
+const getGameId = (location) => {
     const gameId = location.substring(location.lastIndexOf("/") + 1);
   
     if (gameId === "lobby") {
@@ -20,7 +20,7 @@ const showMessage = (data) => {
     }
   };
   
-  const isOnGoingGame = async () => {
+const isOnGoingGame = async () => {
     const game_id = getGameId(document.location.pathname);
     let isOnGoing = false;
   
@@ -39,6 +39,22 @@ const showMessage = (data) => {
       }
     } catch (err) {
       console.log(err);
+    }
+  };
+
+const startGame = async () => {
+    const game_id = getGameId(document.location.pathname);
+
+    try{
+        const res = await fetch(`/waitingRoom/${game_id}/start`);
+        const data = await res.json();
+
+        if (data.status === 400 || data.status === 500) {
+            showMessage(data);
+            return;
+        }
+    } catch (err) {
+        console.log(err);
     }
   };
 

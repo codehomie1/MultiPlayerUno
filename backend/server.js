@@ -8,7 +8,10 @@ const cookieParser = require("cookie-parser");
 const { Client } = require("pg");
 const bodyParser = require("body-parser");
 const session = require("express-session");
+const pgSession = require("connect-pg-simple")(session);
+const db = require("./db/db.js");
 const PORT = process.env.PORT || 3000;
+const initSockets = require("./middleware/io.js");
 
 const {
   viewSessionData,
@@ -18,7 +21,16 @@ const {
 
 const express = require("express");
 const app = express();
-const server = http.createServer(app);
+
+const sessionMiddleware = session({
+  store: new pgSession({ pgPromise: db, createTableIfMissing: true }),
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: false,
+  cookie: { maxAge: 1000*60*60*24*7 },
+});
+
+const server = initSockets(app, sessionMiddleware);
 const io = socketIO(server);
 
 io.on("connection", (socket) => {
@@ -72,6 +84,8 @@ if (process.env.NODE_ENV === "development") {
 
   app.use(connectLiveReload());
 }
+
+
 
 app.use(
   session({

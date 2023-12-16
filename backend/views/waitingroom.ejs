@@ -6,6 +6,7 @@
     <title>Game</title>
     <link rel="stylesheet" href="/css/home.css">
     <script src="/js/main.js" defer></script>
+    <script src="/js/gameID.js" defer></script>
 
 
 </head>
@@ -19,12 +20,10 @@
         <h2 class="header-pages">Lobby Name !!!DO SOMETHING HERE!!! </h2>
         <h3>
             <%= user.username %> has joined <br>
-            <%= user.username %> has joined <br>
-            <%= user.username %> has joined <br>
         </h3>
 
         <div class="form-group">
-            <button id="findGameButton" class="submitButton">Start Game</button>
+            <a href="#"><button id="findGameButton" class="submitButton" onclick="startGame();">Start Game</button></a>
         </div>
     </div>
 
@@ -36,6 +35,7 @@
             messageDiv.textContent = message;
             document.getElementById('chatMessages').appendChild(messageDiv);
         }
+
     </script>
     <my-footer></my-footer>
 
