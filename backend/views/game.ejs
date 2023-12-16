@@ -16,7 +16,68 @@
         <h1 class="header-pages">
             Welcome to game page <%= user.username %>
         </h1>
-        <!-- <h2 class="header-pages">Game id </h2> -->
+        <h2 class="header-pages">Game id <%= game_id %></h2>
+        
+        <!-- Quit and Start Game Buttons -->
+        <div class="game-controls">
+            <input class="quit-btn" id="quit-btn-id" type='button' value='Quit' onclick="saveGameState()" />
+        </div>
+        <!-- Uno Game Interface -->
+        <div class="uno-interface">
+
+
+            <!-- Number of Players -->
+            <div class="num-of-players-display">
+                <h3 id="num-of-players-id" class="num-players">Number of Players:</h3>
+            </div>
+
+            <!-- Gameplay Screen -->
+            <div class='pile-container'>
+                <!-- Deck Container -->
+                <div class="deck-container">
+                    <div class='deck'>
+                        <h3>Deck</h3>
+                        <img id="deck-img-id" src='/cards/back.png' alt='Deck' height="135px" width="100px">
+                    </div>
+                </div>
+
+                <!-- Discard Container -->
+                <div class="discard-container">
+                    <div class='discard-pile'>
+                        <h3>Discard Pile</h3>
+                        <img id="discard-img-id" src='/cards/back.png' alt='Discard Pile' height="135px" width="100px">
+                    </div>
+                </div>
+            </div>
+            <input class="draw-btn" type='button' value='Draw' onclick="drawCard()">
+
+
+            <!-- Call Uno and Game Message Displays -->
+            <div class="game-status">
+                <h3 id="call-uno-msg-id" class="call-uno-msg"></h3>
+                <h3 id="game-msg-id" class="game-msg" style="color: yellow; padding: 10px;"></h3>
+                <h3 id="current-player-name-id" class="current-player-name" style="color: green; padding: 10px;"></h3>
+            </div>
+
+            <!-- Player Hands -->
+            <div class="game-container">
+                <div class="game-cards-container">
+                    <h1>Hands</h1>
+                    <div class="game-cards">
+                        <!-- Player's Hand -->
+                        <div id='player-hand-parent-id' class="player-hand">
+                            <h3>Player:</h3>
+                            <!-- Player's cards will be dynamically inserted here -->
+                        </div>
+                        <!-- Opponents' Hands -->
+                        <div id='opponents-hand-parent-id' class="opponents-hand">
+                            <h3>Opponents:</h3>
+                            <!-- Opponents' cards will be dynamically inserted here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="chat-box">
