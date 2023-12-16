@@ -322,6 +322,26 @@ button:hover {
   background-color: #444;
 }
 
+.chat-message {
+  background-color: #f4f4f4; /* Light grey background */
+  margin: 5px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+  max-width: 80%;
+  word-wrap: break-word; /* Ensure long words do not overflow */
+}
+
+/* Differentiate between messages sent by the user and others */
+.chat-message.user {
+  background-color: #d4edda; /* Light green background for user's messages */
+  margin-left: auto; /* Align user messages to the right */
+}
+
+.chat-message.other {
+  /* Style for other users' messages, if needed */
+}
+
 /* Scrollbar styles for chat messages */
 .chat-messages::-webkit-scrollbar {
   width: 8px;
