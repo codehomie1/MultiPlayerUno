@@ -17,32 +17,23 @@
         <h1 class="header-pages">
             Welcome to the Lobby <br>id: <%= user.id %><br>username:  <%= user.username %>
         </h1>
-        <h1>Games List</h1>
-            <div class="game-list" id="games-list-id">
-                <h3>This is where the games will get listed</h3>
-            </div>
-            <!--
-            <div class="game-form-container">
+        <h1>Joinable Games</h1>
+        <div class="game-list" id="games-list-id">
+            <h3>This is where the games will get listed</h3>
+        </div>
+            
+        <div class="game-form-container">
             <form id="create-game-form-id" class="game-form" onsubmit="createGame(); return false;">
                 <div class="game-form-row">
                 <label for="gametitle">Game Title</label>
                 <input class="msg-input" name="gametitle" placeholder="Game Title" required>
                 </div>
-                <div class="game-form-row">
-                <label for="count">Number of Players</label>
-                <input class="msg-input" name="count" type="number" placeholder="Number of Players" required>
-                </div>
                 <input class="submit-game-form-btn" type="submit" value="Create">
             </form>
-            </div>
-
-        <div class="lobby-form-group">
-            <button id="findGameButton" class="submitButton">Find a Game</button>
-            <button id="CreateGameButton" class="submitButton">Create a Game</button>
         </div>
-    </div> -->
+    </div>
 
-    <div class="list-container">
+    <!-- <div class="list-container">
         <div class="chat-list-container">
           <h1>Chat</h1>
           <div class="chat-list" id="chat-list-id">
@@ -56,7 +47,25 @@
             <input type="submit" class="msg-btn" value="Send">
           </form>
         </div>
-      </div>
+      </div> -->
+
+      <div class="chat-box">
+        <div class="chat-header">
+            <h2>Chat</h2>
+        </div>
+        <div class="chat-messages" id="chatMessages">
+            <!-- Example of a user message -->
+            <!-- <div class="chat-message user">This is a user's message</div> -->
+
+            <!-- Example of another user's message -->
+            <!-- <div class="chat-message other">This is someone else's message</div> -->
+
+        </div>
+        <form class="chat-form" id="send-chat-form-id" onsubmit="sendMessage(); return false;">
+            <input name="message" type="text" id="chatInput" placeholder="Type a message..." autocomplete="off">
+            <input type="submit" class="msg-btn" value="Send">
+        </form>
+    </div>
       
 
     <my-footer></my-footer>

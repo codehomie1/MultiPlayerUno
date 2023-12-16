@@ -31,7 +31,7 @@ const getAllMessages = async () => {
         return;
       }
   
-      let chatList = document.getElementById("chat-list-id");
+      let chatList = document.getElementById("chatMessages");
   
       if (!chatList) {
         return;
@@ -64,10 +64,12 @@ const getAllMessages = async () => {
         let messageP = document.createElement("p");
         messageP.style.margin = "5px";
         messageP.textContent = msg.message;
-  
+        
+        messageP.classList.add("chat-message");
+        messageP.classList.add("user");
         li.appendChild(usernameSpan);
-        li.appendChild(createdAtSpan);
-        li.appendChild(document.createTextNode(": "));
+        // li.appendChild(createdAtSpan);
+        // li.appendChild(document.createTextNode(": "));
         li.appendChild(messageP);
   
         chatList.appendChild(li);
@@ -81,6 +83,7 @@ const sendMessage = async () => {
     const form = document.getElementById("send-chat-form-id");
     const formData = new FormData(form);
     const formDataJson = {};
+    
 
     for (const [key, value] of formData) {
         formDataJson[key] = value;
@@ -100,17 +103,81 @@ const sendMessage = async () => {
         body: JSON.stringify(formDataJson),
     };
 
+    // console.log("---------messageInfo---------");
+    // console.log(options.body);
+
     try {
         const res = await fetch("/lobby/send-message", options);
         const data = await res.json();
 
         if (data.status === 400 || data.status === 500) {
+            showMessage(data);
+            getAllMessages();
+            return;
+        }
+        } catch (err) {
+            console.log(err);
+        }
+};
+
+const createGame = async () => {
+    const form = document.getElementById("create-game-form-id");
+    const formData = new FormData(form);
+    const formDataJson = {};
+  
+    for (const [key, value] of formData) {
+      formDataJson[key] = value;
+    }
+  
+    const userSession = await getUserSession();
+    formDataJson["user_id"] = userSession.id;
+  
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formDataJson),
+    };
+  
+    try {
+      const res = await fetch("/lobby/create-game", options);
+      const data = await res.json();
+      getGames();
+      if (data.status === 400) {
         showMessage(data);
         return;
-        }
+      }
     } catch (err) {
-        console.log(err);
+      console.log(err);
     }
-};
+  };
   
-getAllMessages();
+  const getGames = async() => {
+    try {
+        const res = await fetch("/lobby/get-games", { method: "GET" });
+        const data = await res.json();
+        const messageArray = data.messageArray;
+    
+        if (data.status === 400 || data.status === 500) {
+          return;
+        }
+    
+        let gameList = document.getElementById("games-list-id");
+    
+        if (!gameList) {
+          return;
+        }
+    
+        gameList.innerHTML = "";
+    
+        messageArray.map((msg) => {
+          let li = document.createElement("div");
+        //   li.className = "game";
+          li.innerHTML = `<a class="game-room-link" href="#">Title: ${msg.game_title}, # ${msg.id}, Players: ${msg.users_required}, Started: ${msg.ongoing}</a>`;
+          gameList.appendChild(li);
+        });
+      } catch (err) {
+        console.log(err);
+      }
+    };
