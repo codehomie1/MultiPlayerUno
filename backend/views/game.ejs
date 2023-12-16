@@ -21,35 +21,50 @@
         <div class="game-controls">
             <input class="quit-btn" id="quit-btn-id" type='button' value='Quit' onclick="saveGameState()" />
         </div>
+
+        
+        <!-- Number of Players -->
+        <div class="num-of-players-display">
+            <h3 id="num-of-players-id" class="num-players">Number of Players:</h3>
+        </div>
         <!-- Uno Game Interface -->
         <div class="uno-interface">
-
-
-            <!-- Number of Players -->
-            <div class="num-of-players-display">
-                <h3 id="num-of-players-id" class="num-players">Number of Players:</h3>
-            </div>
-
             <!-- Gameplay Screen -->
             <div class='pile-container'>
                 <!-- Deck Container -->
                 <div class="deck-container">
-                    <div class='deck'>
+                    <div class="pile-name">
                         <h3>Deck</h3>
+                    </div>
+                    <div class='deck'>
                         <img id="deck-img-id" src='/cards/back.png' alt='Deck' height="135px" width="100px">
                     </div>
                 </div>
 
                 <!-- Discard Container -->
                 <div class="discard-container">
-                    <div class='discard-pile'>
+                    <div class="pile-name">
                         <h3>Discard Pile</h3>
+                    </div>
+                    <div class='discard-pile'>
                         <img id="discard-img-id" src='/cards/back.png' alt='Discard Pile' height="135px" width="100px">
                     </div>
                 </div>
             </div>
-            <input class="draw-btn" type='button' value='Draw' onclick="drawCard()">
 
+            <!-- Played Cards Container -->
+            <div class="discard-container">
+                <div class="pile-name">
+                    <h3>Card</h3>
+                </div>
+                <div class='discard-pile'>
+                    <img id="discard-img-id" src='/cards/back.png' alt='Discard Pile' height="135px" width="100px">
+                </div>
+            </div>
+            
+            <div class="draw-btn-loc">
+                <input class="draw-btn" type='button' value='Draw' onclick="drawCard()">
+            </div>
 
             <!-- Call Uno and Game Message Displays -->
             <div class="game-status">
@@ -61,17 +76,32 @@
             <!-- Player Hands -->
             <div class="game-container">
                 <div class="game-cards-container">
-                    <h1>Hands</h1>
+                    <div class="hands-title">
+                        <h1>Hands</h1>
+                    </div>
                     <div class="game-cards">
                         <!-- Player's Hand -->
-                        <div id='player-hand-parent-id' class="player-hand">
-                            <h3>Player:</h3>
-                            <!-- Player's cards will be dynamically inserted here -->
-                        </div>
-                        <!-- Opponents' Hands -->
-                        <div id='opponents-hand-parent-id' class="opponents-hand">
-                            <h3>Opponents:</h3>
-                            <!-- Opponents' cards will be dynamically inserted here -->
+                        <div class="hands-container">
+                            <!-- Player's Hand -->
+                            <div id='player-hand-parent-id' class="player-hand">
+                                <h3>Player:</h3>
+                                <!-- Player's cards here -->
+                                <img id="discard-img-id" src='/cards/0-0.png' height="135px" width="100px">
+                                <img id="discard-img-id" src='/cards/2-4.png' height="135px" width="100px">
+                                <img id="discard-img-id" src='/cards/3-7.png' height="135px" width="100px">
+                                <img id="discard-img-id" src='/cards/1-5.png' height="135px" width="100px">
+
+                            </div>
+
+                            <!-- Opponents' Hands -->
+                            <div id='opponents-hand-parent-id' class="opponents-hand">
+                                <h3>Opponents:</h3>
+                                <!-- Opponents' cards here -->
+                                <img id="discard-img-id" src='/cards/0-4.png' height="135px" width="100px">
+                                <img id="discard-img-id" src='/cards/3-2.png' height="135px" width="100px">
+                                <img id="discard-img-id" src='/cards/2-7.png' height="135px" width="100px">
+                                <img id="discard-img-id" src='/cards/1-1.png' height="135px" width="100px">
+                            </div>
                         </div>
                     </div>
                 </div>
