@@ -24,7 +24,12 @@
             <h2>Chat</h2>
         </div>
         <div class="chat-messages" id="chatMessages">
-            <!-- Chat messages will be appended here -->
+            <!-- Example of a user message -->
+            <div class="chat-message user">This is a user's message</div>
+
+            <!-- Example of another user's message -->
+            <div class="chat-message other">This is someone else's message</div>
+
         </div>
         <form class="chat-form" id="chatForm">
             <input type="text" id="chatInput" placeholder="Type a message..." autocomplete="off">
@@ -32,6 +37,15 @@
         </form>
     </div>
 
+    <script>
+        function appendMessage(username, message) {
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('chat-message');
+            messageDiv.classList.add(username === 'user.username' ? 'user' : 'other'); // Double Check
+            messageDiv.textContent = message;
+            document.getElementById('chatMessages').appendChild(messageDiv);
+        }
+    </script>
     <my-footer></my-footer>
 
 </body>
