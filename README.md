@@ -23,6 +23,3 @@ https://docs.google.com/presentation/d/1UyYIPCfwzPVKI09zPFeDuPKfUJRDLgw8d9lbMcDu
     <li>delete all tables from db (especially pgmigrations)</li>
     <li>do db migrate</li>
 </ol>
-
-**WebApp Demo**
-<img src='./public/UnoDemo.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
